@@ -10,14 +10,3 @@ bold_italic_font auto
 # END_KITTY_FONTS
 
 font_size 18.0
-
-
-# BEGIN_KITTY_THEME
-# Solarized Dark
-include current-theme.conf
-# END_KITTY_THEME
-
-
-tab_bar_edge top
-
-background_opacity 0.95

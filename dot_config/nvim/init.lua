@@ -13,6 +13,7 @@ colorscheme = tokyonight
 
 vim.keymap.set('n', '<C-n>',vim.cmd.NvimTreeToggle)
 require("config.lazy")
+--[[
 require("mason").setup()
 require("mason-lspconfig").setup()
 --require("lspconfig").clangd.setup{}
@@ -26,7 +27,7 @@ require("mason-lspconfig").setup({
     end,
   }
 })
-
+]]
 
 -- LSPサーバアタッチ時の処理
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -51,13 +52,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     set("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", { buffer = true })
   end,
 })
+--[[
+-- friendly-snippetsからスニペットを読み込む
+require("luasnip.loaders.from_vscode").lazy_load()
+]]
 
+--[[
 -- nvim-cmpの設定
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
--- friendly-snippetsからスニペットを読み込む
-require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
   snippet = {
@@ -96,4 +100,8 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'path' },
   }),
+  --require('Comment').setup()
+
 })
+
+]]
