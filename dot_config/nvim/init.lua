@@ -6,12 +6,16 @@ vim.opt.softtabstop=4
 vim.opt.shiftwidth=4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
-vim.opt.clipboard:append{'unnamedplus'}
+vim.opt.clipboard:append{'unnamed,unnamedplus'}
 colorscheme = tokyonight
 
 
 
 vim.keymap.set('n', '<C-n>',vim.cmd.NvimTreeToggle)
+vim.keymap.set('n', '<S-Tab>', '<<')
+vim.keymap.set('n', '<Tab>', '>>')
+vim.keymap.set('i', '<S-Tab>', '<C-d>')
+vim.keymap.set('i', 'jj', '<Esc>')
 require("config.lazy")
 --[[
 require("mason").setup()
@@ -103,5 +107,6 @@ cmp.setup({
   --require('Comment').setup()
 
 })
-
 ]]
+
+

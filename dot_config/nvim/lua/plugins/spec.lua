@@ -129,6 +129,7 @@ return
                 { name = 'luasnip' },
                 { name = 'buffer' },
                 { name = 'path' },
+                -- { name = 'copilot'}
             }),
             --require('Comment').setup()
 
@@ -143,7 +144,11 @@ return
     },
     {
         "github/copilot.vim",
+        opt={
+            vim.g.copilot_no_tab_map=true,
+        }
     },
-
-
+    {
+        'tpope/vim-surround',
+    },
 }
