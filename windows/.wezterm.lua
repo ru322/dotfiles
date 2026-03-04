@@ -20,7 +20,17 @@ config.default_prog = { 'pwsh.exe' }
 -- ① タイトルバーを非表示 (ウィンドウ枠のみ残す)
 config.window_decorations = 'RESIZE'
 
--- ② キーバインド
+-- ② マウス設定
+config.mouse_bindings = {
+  -- 右クリックでペースト
+  {
+    event = { Down = { streak = 1, button = 'Right' } },
+    mods = 'NONE',
+    action = wezterm.action.PasteFrom 'Clipboard',
+  },
+}
+
+-- キーバインド
 config.keys = {
   -- Shift+Enter で改行を送信
   {
