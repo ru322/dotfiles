@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -ExecutionPolicy Bypass -Command \"& \\\"$env:USERPROFILE\\.claude\\notify.ps1\\\"\""
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opusplan"
+}
