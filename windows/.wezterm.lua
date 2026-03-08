@@ -11,7 +11,7 @@ config.color_scheme = 'Solarized Dark (Gogh)'
 -- 背景: Solarized Dark ベース色の上に画像を20%で重ねる
 config.background = {
   { source = { Color = '#002b36' }, width = '100%', height = '100%' },
-  { source = { File = 'C:/Users/koyama/Pictures/Top14.png' }, opacity = 0.2, width = '100%', height = '100%' },
+  { source = { File = wezterm.home_dir .. '/.config/wallpapers/Top14.png' }, opacity = 0.2, width = '100%', height = '100%' },
 }
 
 -- デフォルトシェル
