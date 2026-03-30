@@ -144,11 +144,15 @@ return
     },
     {
         "github/copilot.vim",
-        opt={
-            vim.g.copilot_no_tab_map=true,
-        }
+        init = function()
+            vim.g.copilot_no_tab_map = true
+        end,
     },
     {
         'tpope/vim-surround',
+    },
+    {
+        "xiyaowong/transparent.nvim",
+        opts = {},
     },
 }

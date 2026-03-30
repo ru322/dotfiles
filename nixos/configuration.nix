@@ -170,8 +170,7 @@
     fonts = with pkgs; [
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
-      noto-fonts-emoji
-      hack
+      hack-font
     ];
     fontDir.enable = true;
   };
