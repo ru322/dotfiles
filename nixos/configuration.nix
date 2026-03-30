@@ -13,6 +13,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./ssh.nix
     ];
 
   # Bootloader.
@@ -88,13 +89,34 @@
     isNormalUser = true;
     description = "koyama";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjUu6/cM2c7AkO9AKwzD3X+JJm511EsiGC9Wf+rwcu+ koyama@margatroid"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOH3SOeI/fvAl51Rre4AwOYieG1lZ3qbFKuBG3hSe7n5 koyama@horai"
     ];
   };
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs = {
+    git = {
+      enable = true;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+    starship = {
+      enable = true;
+    };
+    zsh = {
+      enable = true;
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -124,7 +146,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
+  networking.interfaces.ens18.useDHCP = false;
+  networking.interfaces.ens18.ipv4.addresses = [{
+    address = "192.168.1.110";
+    prefixLength = 24;
+  }];
+  networking.defaultGateway = "192.168.1.1";
+  networking.nameservers = ["8.8.8.8"];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -133,4 +161,18 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
+  i18n.inputMethod = {
+     enabled = "fcitx5";
+     fcitx5.addons = [pkgs.fcitx5-mozc];
+  };
+
+  fonts = {
+    fonts = with pkgs; [
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      hack
+    ];
+    fontDir.enable = true;
+  };
 }
