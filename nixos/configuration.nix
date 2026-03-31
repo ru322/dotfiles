@@ -14,6 +14,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./ssh.nix
+      ./hyprland.nix
     ];
 
   # Bootloader.
@@ -52,9 +53,10 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Use GDM with Hyprland (GDM supports Wayland sessions)
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -162,12 +164,13 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
   i18n.inputMethod = {
-     enabled = "fcitx5";
+     enable = true;
+     type = "fcitx5";
      fcitx5.addons = [pkgs.fcitx5-mozc];
   };
 
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       hack-font

@@ -9,5 +9,13 @@
   imports = [
     ./neovim.nix
     ./dev.nix
+    ./sunshine.nix
+    ./wl-clipboard.nix
   ];
+
+  # Hyprland config
+  xdg.configFile."hypr" = {
+    source = ../linux/.config/hypr;
+    recursive = true;
+  };
 }
