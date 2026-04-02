@@ -1,6 +1,0 @@
-[memory_usage]
-disabled = false
-threshold = -1
-format = "via $symbol[$ram( | $swap)]($style) "
-symbol = " "
-style = "bold dimmed green"
