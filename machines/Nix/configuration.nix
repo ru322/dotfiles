@@ -16,8 +16,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./ssh.nix
-    ./hyprland.nix
+    ../../common/nixos/ssh.nix
+    ../../common/nixos/hyprland.nix
   ];
 
   # Bootloader.

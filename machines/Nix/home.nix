@@ -6,18 +6,19 @@
     stateVersion = "22.11";
   };
   programs.home-manager.enable = true;
+
   imports = [
-    ./neovim.nix
-    ./dev.nix
-    ./sunshine.nix
-    ./wl-clipboard.nix
-    ./git.nix
-    ./zsh.nix
+    ../../common/home-mgr/neovim.nix
+    ../../common/home-mgr/dev.nix
+    ../../common/home-mgr/sunshine.nix
+    ../../common/home-mgr/wl-clipboard.nix
+    ../../common/home-mgr/git.nix
+    ../../common/home-mgr/zsh.nix
   ];
 
   # Hyprland config
   xdg.configFile."hypr" = {
-    source = ../linux/.config/hypr;
+    source = ../../common/.config/hypr;
     recursive = true;
   };
 
