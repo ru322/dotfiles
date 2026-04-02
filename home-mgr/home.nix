@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   home = rec {
     username = "koyama";
@@ -11,6 +11,7 @@
     ./dev.nix
     ./sunshine.nix
     ./wl-clipboard.nix
+    ./git.nix
   ];
 
   # Hyprland config
@@ -18,4 +19,8 @@
     source = ../linux/.config/hypr;
     recursive = true;
   };
+
+  home.packages = with pkgs; [
+    vscode
+  ];
 }

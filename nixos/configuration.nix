@@ -7,15 +7,18 @@
 {
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
-    };  
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./ssh.nix
-      ./hyprland.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./ssh.nix
+    ./hyprland.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -90,10 +93,13 @@
   users.users.koyama = {
     isNormalUser = true;
     description = "koyama";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjUu6/cM2c7AkO9AKwzD3X+JJm511EsiGC9Wf+rwcu+ koyama@margatroid"
@@ -126,8 +132,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -149,12 +155,14 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   networking.interfaces.ens18.useDHCP = false;
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "192.168.1.110";
-    prefixLength = 24;
-  }];
+  networking.interfaces.ens18.ipv4.addresses = [
+    {
+      address = "192.168.1.110";
+      prefixLength = 24;
+    }
+  ];
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = ["8.8.8.8"];
+  networking.nameservers = [ "8.8.8.8" ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -164,15 +172,16 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
   i18n.inputMethod = {
-     enable = true;
-     type = "fcitx5";
-     fcitx5.addons = [pkgs.fcitx5-mozc];
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = [ pkgs.fcitx5-mozc ];
   };
 
   fonts = {
     packages = with pkgs; [
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
+      noto-fonts-color-emoji
       hack-font
     ];
     fontDir.enable = true;

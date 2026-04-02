@@ -1,8 +1,8 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     wl-clipboard
-    cliphist  # Clipboard history manager
+    cliphist # Clipboard history manager
   ];
 
   # Clipboard history with cliphist (for Hyprland/Wayland)

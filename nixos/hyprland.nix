@@ -1,5 +1,10 @@
 # Hyprland configuration
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   hyprlandConfigDir = ../linux/.config/hypr;
@@ -13,17 +18,17 @@ in
 
   # Required packages for Hyprland
   environment.systemPackages = with pkgs; [
-    kitty           # Terminal
-    wofi            # App launcher
-    waybar          # Status bar
-    dunst           # Notifications
-    hyprpaper       # Wallpaper
-    wl-clipboard    # Clipboard
-    grim            # Screenshot
-    slurp           # Screen area selection
-    swaylock        # Screen lock
-    brightnessctl   # Brightness control
-    pamixer         # Audio control
+    kitty # Terminal
+    wofi # App launcher
+    waybar # Status bar
+    dunst # Notifications
+    hyprpaper # Wallpaper
+    wl-clipboard # Clipboard
+    grim # Screenshot
+    slurp # Screen area selection
+    swaylock # Screen lock
+    brightnessctl # Brightness control
+    pamixer # Audio control
   ];
 
   # XDG portal for Hyprland

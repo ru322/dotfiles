@@ -10,22 +10,22 @@
     homeConfigurations = {
       myHome = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
-	  system = "x86_64-linux";
-	  config.allowUnfree = true;
-	};
-	extraSpecialArgs = {
-	  inherit inputs;
-	};
-	modules = [
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+        modules = [
           ./home-mgr/home.nix
-	];
+        ];
       };
     };
     nixosConfigurations = {
       myNixOS = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	modules = [
-	  ./nixos/configuration.nix
+        modules = [
+          ./nixos/configuration.nix
         ];
       };
     };
