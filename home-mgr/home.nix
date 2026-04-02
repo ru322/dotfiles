@@ -12,6 +12,7 @@
     ./sunshine.nix
     ./wl-clipboard.nix
     ./git.nix
+    ./zsh.nix
   ];
 
   # Hyprland config

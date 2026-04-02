@@ -4,7 +4,7 @@
     enable = true;
     autocd = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
-    syntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
   };
 }

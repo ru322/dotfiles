@@ -4,6 +4,7 @@
     enable = true;
     extraPackages = with pkgs; [
       nodejs
+      wl-clipboard
     ];
   };
 
