@@ -4,6 +4,10 @@
 
 { config, pkgs, ... }:
 
+let
+  sshKeys = import ../../resources/ssh-keys/koyama.nix;
+in
+
 {
   nix = {
     settings = {
@@ -18,6 +22,9 @@
     ./hardware-configuration.nix
     ../../common/nixos/ssh.nix
     ../../common/nixos/hyprland.nix
+    ../../common/nixos/programs.nix
+    ../../common/nixos/fonts.nix
+    ../../common/nixos/fcitx5.nix
   ];
 
   # Bootloader.
@@ -101,30 +108,11 @@
     packages = with pkgs; [
       #  thunderbird
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjUu6/cM2c7AkO9AKwzD3X+JJm511EsiGC9Wf+rwcu+ koyama@margatroid"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOH3SOeI/fvAl51Rre4AwOYieG1lZ3qbFKuBG3hSe7n5 koyama@horai"
-    ];
+    openssh.authorizedKeys.keys = sshKeys;
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
-
-  programs = {
-    git = {
-      enable = true;
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-    starship = {
-      enable = true;
-    };
-    zsh = {
-      enable = true;
-    };
-  };
+  # programs.firefox.enable = true;  # Moved to common/nixos/programs.nix
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -171,19 +159,5 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = [ pkgs.fcitx5-mozc ];
-  };
-
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts-cjk-serif
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      hack-font
-    ];
-    fontDir.enable = true;
-  };
+  # fcitx5 moved to common/nixos/fcitx5.nix
 }
