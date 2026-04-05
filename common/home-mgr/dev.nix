@@ -6,5 +6,8 @@
     vscode
     pre-commit
     nixfmt-rfc-style
+    gcc
+    gnumake
+    gdb
   ];
 }

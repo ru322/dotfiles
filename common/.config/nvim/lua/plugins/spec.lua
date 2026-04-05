@@ -152,6 +152,11 @@ return
         'tpope/vim-surround',
     },
     {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+    },
+    {
         "xiyaowong/transparent.nvim",
         opts = {
             extra_groups = {

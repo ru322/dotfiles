@@ -11,6 +11,7 @@
   imports = [
     # include NixOS-WSL modules
     <nixos-wsl/modules>
+    ../../common/nixos/programs.nix
     ../../common/nixos/nixos-vscode-server.nix
   ];
 

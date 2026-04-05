@@ -5,6 +5,7 @@
     extraPackages = with pkgs; [
       nodejs
       wl-clipboard
+      ripgrep
     ];
   };
 
