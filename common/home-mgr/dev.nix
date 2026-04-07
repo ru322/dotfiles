@@ -9,5 +9,6 @@
     gcc
     gnumake
     gdb
+    uv
   ];
 }
