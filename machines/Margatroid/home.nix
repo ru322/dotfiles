@@ -16,6 +16,7 @@
     ../../common/home-mgr/git.nix
     ../../common/home-mgr/zsh.nix
     #../../common/home-mgr/nixos-vscoder-server.nix
+    #../../common/home-mgr/docker-cli.nix
   ];
 
   # Hyprland config

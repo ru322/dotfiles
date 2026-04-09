@@ -10,5 +10,6 @@
     gnumake
     gdb
     uv
+    docker-compose
   ];
 }

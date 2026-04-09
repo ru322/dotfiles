@@ -1,6 +1,6 @@
 {pkgs, ...}:
 {
-    programs.docker-cli = {
+    programs.codex = {
         enable = true;
-    }
+    };
 }
