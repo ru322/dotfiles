@@ -12,6 +12,45 @@ vim.opt.smartindent = true
 vim.opt.clipboard:append{'unnamed,unnamedplus'}
 colorscheme = tokyonight
 
+vim.opt.termguicolors = true
+
+local function set_transparent_background()
+  local groups = {
+    "Normal",
+    "NormalNC",
+    "SignColumn",
+    "EndOfBuffer",
+    "LineNr",
+    "FoldColumn",
+    "NonText",
+    "VertSplit",
+    "StatusLine",
+    "StatusLineNC",
+    "NormalFloat",
+    "FloatBorder",
+    "Pmenu",
+    "NvimTreeNormal",
+    "NvimTreeNormalNC",
+    "NvimTreeEndOfBuffer",
+    "NvimTreeWinSeparator",
+    "NvimTreeStatusLine",
+    "NvimTreeStatusLineNC",
+    "NERDTreeNormal",
+    "NERDTreeNormalNC",
+    "NERDTreeEndOfBuffer",
+    "NERDTreeWinSeparator",
+  }
+
+  for _, group in ipairs(groups) do
+    vim.api.nvim_set_hl(0, group, { bg = "none", ctermbg = "none" })
+  end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_transparent_background,
+})
+
+set_transparent_background()
 
 
 vim.keymap.set('n', '<C-n>',vim.cmd.NvimTreeToggle)
@@ -121,5 +160,3 @@ cmp.setup({
 
 })
 ]]
-
-

@@ -2,6 +2,8 @@
 {
   programs.neovim = {
     enable = true;
+    withPython3 = true;
+    withRuby = true;
     extraPackages = with pkgs; [
       nodejs
       wl-clipboard
