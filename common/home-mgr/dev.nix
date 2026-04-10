@@ -11,5 +11,6 @@
     gdb
     uv
     docker-compose
+    supabase-cli
   ];
 }
