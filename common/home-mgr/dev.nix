@@ -12,5 +12,6 @@
     uv
     docker-compose
     supabase-cli
+    postgresql
   ];
 }
