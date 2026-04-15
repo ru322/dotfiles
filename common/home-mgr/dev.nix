@@ -17,5 +17,6 @@
     postgresql
     typst
     pnpm
+    mise
   ];
 }
