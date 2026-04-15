@@ -16,5 +16,6 @@
     supabase-cli
     postgresql
     typst
+    pnpm
   ];
 }
