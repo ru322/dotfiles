@@ -1,6 +1,7 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
-    programs.codex = {
-        enable = true;
-    };
+  programs.codex = {
+    enable = true;
+    package = pkgs.callPackage ../pkgs/codex.nix { };
+  };
 }
