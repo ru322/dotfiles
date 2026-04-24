@@ -18,5 +18,6 @@
     typst
     pnpm
     mise
+    ripgrep
   ];
 }
