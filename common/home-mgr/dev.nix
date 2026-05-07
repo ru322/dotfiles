@@ -19,5 +19,6 @@
     pnpm
     mise
     ripgrep
+    tree
   ];
 }
