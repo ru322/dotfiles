@@ -20,5 +20,7 @@
     mise
     ripgrep
     tree
+    flex
+    qpdf
   ];
 }
