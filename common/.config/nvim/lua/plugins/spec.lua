@@ -24,7 +24,20 @@ return
     },
     {
         'numToStr/Comment.nvim',
-        opt={}
+        opts = {},
+        config = function(_, opts)
+            require('Comment').setup(opts)
+
+            local api = require('Comment.api')
+            local map_opts = { desc = 'Toggle comment', silent = true }
+            local visual_toggle = '<ESC><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>'
+
+            -- Many terminals send Ctrl+/ to Neovim as Ctrl+_.
+            vim.keymap.set('n', '<C-_>', api.toggle.linewise.current, map_opts)
+            vim.keymap.set('x', '<C-_>', visual_toggle, map_opts)
+            vim.keymap.set('n', '<C-/>', api.toggle.linewise.current, map_opts)
+            vim.keymap.set('x', '<C-/>', visual_toggle, map_opts)
+        end,
     },
     {
         'akinsho/bufferline.nvim',
@@ -135,12 +148,6 @@ return
 
             })
         end,
-    },
-    {
-        'numToStr/Comment.nvim',
-        opts = {
-            -- add any options here
-        },
     },
     {
         "github/copilot.vim",
