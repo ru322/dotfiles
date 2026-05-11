@@ -22,5 +22,6 @@
     tree
     flex
     qpdf
+    poppler-utils
   ];
 }
