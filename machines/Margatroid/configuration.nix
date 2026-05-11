@@ -19,7 +19,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
-
+  networking.resolvconf.enable = false;
   users.users.nixos = {
     isNormalUser = true;
     extraGroups = ["wheel" "docker"];
