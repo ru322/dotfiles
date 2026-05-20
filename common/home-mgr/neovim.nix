@@ -5,6 +5,8 @@
     withPython3 = true;
     withRuby = true;
     extraPackages = with pkgs; [
+      unzip
+      cargo
       nodejs
       wl-clipboard
       ripgrep
