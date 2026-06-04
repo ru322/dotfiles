@@ -23,5 +23,6 @@
     flex
     qpdf
     poppler-utils
+    bison
   ];
 }
