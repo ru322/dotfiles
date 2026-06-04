@@ -24,5 +24,6 @@
     qpdf
     poppler-utils
     bison
+    tshark
   ];
 }
