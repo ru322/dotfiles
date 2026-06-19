@@ -1,5 +1,9 @@
 # Common programs configuration
+{ pkgs, ... }:
+
 {
+  users.defaultUserShell = pkgs.zsh;
+
   programs = {
     firefox.enable = true;
     git.enable = true;

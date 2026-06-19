@@ -14,6 +14,7 @@
     #../../common/home-mgr/sunshine.nix
     #../../common/home-mgr/wl-clipboard.nix
     ../../common/home-mgr/git.nix
+    ../../common/home-mgr/tmux.nix
     ../../common/home-mgr/zsh.nix
     #../../common/home-mgr/nixos-vscoder-server.nix
     #../../common/home-mgr/docker-cli.nix

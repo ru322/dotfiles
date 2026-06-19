@@ -7,6 +7,7 @@
     ./git.nix
     ./neovim.nix
     ./sunshine.nix
+    ./tmux.nix
     ./wl-clipboard.nix
     ./zsh.nix
   ];
