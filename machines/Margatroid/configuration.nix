@@ -9,8 +9,6 @@
 
 {
   imports = [
-    # include NixOS-WSL modules
-    <nixos-wsl/modules>
     ../../common/nixos/docker.nix
     ../../common/nixos/fonts.nix
     ../../common/nixos/programs.nix

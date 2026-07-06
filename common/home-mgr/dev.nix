@@ -26,5 +26,6 @@
     bison
     tshark
     tmux
+    bc
   ];
 }

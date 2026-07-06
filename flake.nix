@@ -9,6 +9,10 @@
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs: {
     homeConfigurations = {
@@ -65,6 +69,7 @@
       Margatroid = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.nixos-wsl.nixosModules.default
           inputs.vscode-server.nixosModules.default
           ./machines/Margatroid/configuration.nix
         ];
