@@ -40,7 +40,7 @@
           ./machines/Alice/home.nix
         ];
       };
-      Margatroid = inputs.home-manager.lib.homeManagerConfiguration {
+      NixWSL = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
@@ -49,7 +49,7 @@
           inherit inputs;
         };
         modules = [
-          ./machines/Margatroid/home.nix
+          ./machines/NixWSL/home.nix
         ];
       };
     };
@@ -66,12 +66,12 @@
           ./machines/Alice/configuration.nix
         ];
       };
-      Margatroid = inputs.nixpkgs.lib.nixosSystem {
+      NixWSL = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           inputs.nixos-wsl.nixosModules.default
           inputs.vscode-server.nixosModules.default
-          ./machines/Margatroid/configuration.nix
+          ./machines/NixWSL/configuration.nix
         ];
       };
     };
