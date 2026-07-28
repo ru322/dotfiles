@@ -52,6 +52,18 @@
           ./machines/NixWSL/home.nix
         ];
       };
+      Satori = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import inputs.nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./machines/Satori/home.nix
+        ];
+      };
     };
     nixosConfigurations = {
       Nix = inputs.nixpkgs.lib.nixosSystem {
@@ -72,6 +84,12 @@
           inputs.nixos-wsl.nixosModules.default
           inputs.vscode-server.nixosModules.default
           ./machines/NixWSL/configuration.nix
+        ];
+      };
+      Satori = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/Satori/configuration.nix
         ];
       };
     };
