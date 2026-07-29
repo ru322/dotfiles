@@ -62,6 +62,7 @@
         };
         modules = [
           ./machines/Satori/home.nix
+          ./common/home-mgr/ghostty.nix
         ];
       };
     };
@@ -89,6 +90,9 @@
       Satori = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.vscode-server.nixosModules.default
+          ./common/nixos/fcitx5.nix
+          ./common/nixos/niri.nix
           ./machines/Satori/configuration.nix
         ];
       };
