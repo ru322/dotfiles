@@ -2,4 +2,5 @@ keybind = ctrl+d=new_split:right
 
 font-family = HackGen
 
-background-image = "../../../resources/wallpapers/Top14.png"
+background-opacity = 0.8
+background-blur = true

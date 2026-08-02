@@ -1,4 +1,12 @@
 { config, pkgs, ... }:
+let
+  dimmedWallpaper = pkgs.runCommand "niri-wallpaper-dimmed.png" { } ''
+    ${pkgs.imagemagick}/bin/magick \
+      ${../../resources/wallpapers/Top14.png} \
+      -evaluate Multiply 0.75 \
+      $out
+  '';
+in
 {
   programs.niri = {
     enable = true;
@@ -36,6 +44,7 @@
   ];
 
   environment.etc."niri/config.kdl".source = ../.config/niri/config.kdl;
+  environment.etc."niri/Top14.png".source = dimmedWallpaper;
 
   xdg.portal.config.niri."org.freedesktop.impl.portal.FileChooser" = "gtk";
 }

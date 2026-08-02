@@ -12,6 +12,10 @@ return {
   },
   {
     "xiyaowong/transparent.nvim",
+    lazy = false,
+    init = function()
+      vim.g.transparent_enabled = true
+    end,
     opts = {
       extra_groups = {
         "NvimTreeNormal",

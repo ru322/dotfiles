@@ -28,5 +28,7 @@
     tmux
     bc
     ghq
+    fzf
+    godot
   ];
 }

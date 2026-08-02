@@ -69,7 +69,7 @@ environment {
 
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-spawn-at-startup "swaybg" "-c" "#1e1e2e"
+spawn-at-startup "swaybg" "-i" "/etc/niri/Top14.png" "-m" "fill"
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock -f"
 
 window-rule {

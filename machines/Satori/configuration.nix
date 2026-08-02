@@ -23,6 +23,16 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Let systemd discover the swapfile's resume offset and pass it through
+  # the HibernateLocation EFI variable when hibernating.
+  boot.initrd.systemd.enable = true;
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+    }
+  ];
 
   networking.hostName = "satori"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
