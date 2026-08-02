@@ -17,6 +17,7 @@ in
       ../../common/nixos/fonts.nix
       ../../common/nixos/nixos-vscode-server.nix
       ../../common/nixos/tailscale.nix
+      ../../common/nixos/steam.nix
     ];
 
   # Bootloader.

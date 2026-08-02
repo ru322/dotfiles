@@ -27,5 +27,6 @@
     tshark
     tmux
     bc
+    ghq
   ];
 }

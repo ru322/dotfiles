@@ -1,4 +1,5 @@
-keybind = ctrl+z=close_surface
 keybind = ctrl+d=new_split:right
 
 font-family = HackGen
+
+background-image = "../../../resources/wallpapers/Top14.png"

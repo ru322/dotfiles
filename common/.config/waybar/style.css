@@ -1,0 +1,38 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Noto Sans CJK JP", "Symbols Nerd Font";
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 46, 0.95);
+  color: #cdd6f4;
+}
+
+#workspaces button {
+  padding: 0 6px;
+  color: #6c7086;
+}
+
+#workspaces button.active {
+  color: #89b4fa;
+}
+
+#window,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#clock,
+#tray,
+#custom-power {
+  padding: 0 8px;
+}
+
+#custom-power {
+  color: #f38ba8;
+  padding-right: 12px;
+}

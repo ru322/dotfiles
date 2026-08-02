@@ -9,6 +9,7 @@
     ./sunshine.nix
     ./tmux.nix
     ./wl-clipboard.nix
+    ./yazi.nix
     ./zsh.nix
   ];
 }
