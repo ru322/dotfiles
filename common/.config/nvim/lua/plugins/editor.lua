@@ -1,7 +1,17 @@
 return {
   {
     "numToStr/Comment.nvim",
-    opts = {},
+    opts = {
+      pre_hook = function()
+        local ok, parser = pcall(vim.treesitter.get_parser, 0)
+
+        -- Neovim 0.12 may return nil without raising an error when no parser
+        -- is installed. Comment.nvim assumes a parser exists in that case.
+        if not ok or parser == nil then
+          return vim.bo.commentstring ~= "" and vim.bo.commentstring or "#%s"
+        end
+      end,
+    },
     config = function(_, opts)
       require("Comment").setup(opts)
 

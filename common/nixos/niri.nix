@@ -40,6 +40,7 @@ in
     swaylock
     waybar
     wl-clipboard
+    wtype
     xwayland-satellite
   ];
 

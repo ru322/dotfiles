@@ -31,5 +31,6 @@
     fzf
     godot
     yuview
+    ffmpeg
   ];
 }

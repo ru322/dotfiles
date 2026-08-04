@@ -10,6 +10,7 @@
       nodejs
       wl-clipboard
       ripgrep
+      python3
     ];
   };
 
