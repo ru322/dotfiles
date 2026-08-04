@@ -34,6 +34,22 @@
         "type": "github"
       }
     },
+    "gvfs-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785540425,
+        "narHash": "sha256-GpcCITgdwn8pQHGPRHWeDwGkI1l9vwafmSSCIIIVvoQ=",
+        "owner": "boydaihungst",
+        "repo": "gvfs.yazi",
+        "rev": "cb7084d4bb0a72e4d3db8ff02eab1e5fbb358144",
+        "type": "github"
+      },
+      "original": {
+        "owner": "boydaihungst",
+        "repo": "gvfs.yazi",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -108,6 +124,7 @@
     },
     "root": {
       "inputs": {
+        "gvfs-yazi": "gvfs-yazi",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",

@@ -18,6 +18,7 @@ in
       ../../common/nixos/nixos-vscode-server.nix
       ../../common/nixos/tailscale.nix
       ../../common/nixos/steam.nix
+      ../../common/nixos/gvfs.nix
     ];
 
   # Bootloader.
@@ -108,15 +109,26 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     qt6Packages.fcitx5-configtool
+    cifs-utils
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
+  fileSystems."/mnt/nas" = {
+    device = "//192.168.1.111/ru3";
+    fsType = "cifs";
+    options = let
+          # this line prevents hanging on network split
+          automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    in ["${automount_opts},credentials=/etc/nixos/smb-secrets" "nofail"];
+  };
 
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
     };
   };
+
+
 
 
   # Some programs need SUID wrappers, can be configured further or are

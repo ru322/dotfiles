@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common/nixos/default.nix
+      ../../common/nixos/gvfs.nix
     ];
 
   nix = {

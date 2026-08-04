@@ -13,6 +13,10 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gvfs-yazi = {
+      url = "github:boydaihungst/gvfs.yazi";
+      flake = false;
+    };
   };
   outputs = inputs: {
     homeConfigurations = {

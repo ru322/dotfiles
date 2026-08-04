@@ -13,6 +13,7 @@ in
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
       hack-font
+      hackgen-nf-font
       nerd-fonts."m+"
     ];
     fontDir.enable = true;

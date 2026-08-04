@@ -9,7 +9,7 @@
     zsh-abbr = {
         enable = true;
         abbreviations = {
-            "gc" = "git commit -m \"\" ";
+            "gc" = "git commit -m \"\"";
         };
     };
     initContent =  ''

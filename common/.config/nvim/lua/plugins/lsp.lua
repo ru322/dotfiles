@@ -25,6 +25,13 @@ return {
         end,
       })
 
+      vim.lsp.config("clangd", {
+        cmd = {
+          "clangd",
+          "--query-driver=/home/koyama/.nix-profile/bin/g++",
+        },
+      })
+
       require("mason").setup()
       require("mason-lspconfig").setup(opts)
     end,

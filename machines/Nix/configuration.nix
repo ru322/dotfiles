@@ -25,6 +25,7 @@ in
     ../../common/nixos/programs.nix
     ../../common/nixos/fonts.nix
     ../../common/nixos/fcitx5.nix
+    ../../common/nixos/gvfs.nix
   ];
 
   # Bootloader.

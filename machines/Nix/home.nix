@@ -15,6 +15,7 @@
     ../../common/home-mgr/git.nix
     ../../common/home-mgr/tmux.nix
     ../../common/home-mgr/yazi.nix
+    ../../common/home-mgr/yazi-gvfs.nix
     ../../common/home-mgr/zsh.nix
   ];
 

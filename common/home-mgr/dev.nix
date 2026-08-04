@@ -30,5 +30,6 @@
     ghq
     fzf
     godot
+    yuview
   ];
 }
