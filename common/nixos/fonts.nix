@@ -17,5 +17,11 @@ in
       nerd-fonts."m+"
     ];
     fontDir.enable = true;
+    fontconfig.defaultFonts = {
+      serif = [ "Harano Aji Mincho" ];
+      sansSerif = [ "Harano Aji Gothic" ];
+      monospace = [ "HackGen Console NF" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
   };
 }

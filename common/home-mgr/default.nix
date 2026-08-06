@@ -6,6 +6,7 @@
     ./direnv.nix
     ./git.nix
     ./neovim.nix
+    ./onlyoffice.nix
     ./sunshine.nix
     ./tmux.nix
     ./wl-clipboard.nix

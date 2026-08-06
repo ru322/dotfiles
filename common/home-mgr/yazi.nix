@@ -1,5 +1,10 @@
 { ... }:
 {
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications."application/pdf" = [ "firefox.desktop" ];
+  };
+
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
@@ -27,6 +32,48 @@
         image_filter = "lanczos3";
         image_quality = 80;
       };
+
+      opener = {
+        firefox = [
+          {
+            run = "firefox %s1";
+            orphan = true;
+            desc = "Firefox";
+            for = "linux";
+          }
+        ];
+        onlyoffice = [
+          {
+            run = "onlyoffice-desktopeditors %s1";
+            orphan = true;
+            desc = "ONLYOFFICE";
+            for = "linux";
+          }
+        ];
+      };
+
+      open.prepend_rules = [
+        {
+          mime = "application/pdf";
+          use = [
+            "firefox"
+            "onlyoffice"
+          ];
+        }
+      ];
     };
+
+    keymap.mgr.prepend_keymap = [
+      {
+        on = [ "g" "t" ];
+        run = "cd /mnt/nas/TUAT/";
+        desc = "Go TUAT";
+      }
+      {
+        on = [ "g" "g" ];
+        run = "cd ~/src/github.com/";
+        desc = "Go GHQ";
+      }
+    ];
   };
 }
