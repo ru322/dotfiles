@@ -2,7 +2,10 @@
 {
   xdg.mimeApps = {
     enable = true;
-    defaultApplications."application/pdf" = [ "firefox.desktop" ];
+    defaultApplications = {
+      "application/pdf" = [ "firefox.desktop" ];
+      "image/png" = [ "firefox.desktop" ];
+    };
   };
 
   programs.yazi = {
@@ -51,9 +54,24 @@
             for = "linux";
           }
         ];
+        gimp = [
+          {
+            run = "gimp %s1";
+            orphan = true;
+            desc = "GIMP";
+            for = "linux";
+          }
+        ];
       };
 
       open.prepend_rules = [
+        {
+          mime = "image/png";
+          use = [
+            "firefox"
+            "gimp"
+          ];
+        }
         {
           mime = "application/pdf";
           use = [
