@@ -25,6 +25,7 @@ input {
 window-rule {
     match app-id=r#"(?i)^code$"#
     opacity 0.90
+    draw-border-with-background false
 }
 layout {
     gaps 12
@@ -116,6 +117,15 @@ binds {
     Mod+Ctrl+J { move-window-down; }
     Mod+Ctrl+K { move-window-up; }
     Mod+Ctrl+L { move-column-right; }
+
+    Mod+Shift+Left { move-window-to-monitor-left; }
+    Mod+Shift+Down { move-window-to-monitor-down; }
+    Mod+Shift+Up { move-window-to-monitor-up; }
+    Mod+Shift+Right { move-window-to-monitor-right; }
+    Mod+Ctrl+Shift+Left { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+Down { move-workspace-to-monitor-down; }
+    Mod+Ctrl+Shift+Up { move-workspace-to-monitor-up; }
+    Mod+Ctrl+Shift+Right { move-workspace-to-monitor-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End { focus-column-last; }

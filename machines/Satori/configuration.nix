@@ -7,19 +7,19 @@ let
   sshKeys = import ../../resources/ssh-keys/koyama.nix;
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./hardware-configuration.nix
-      ../../common/nixos/ssh.nix
-      # ../../common/nixos/hyprland.nix
-      ../../common/nixos/programs.nix
-      ../../common/nixos/fonts.nix
-      ../../common/nixos/nixos-vscode-server.nix
-      ../../common/nixos/tailscale.nix
-      ../../common/nixos/steam.nix
-      ../../common/nixos/gvfs.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./hardware-configuration.nix
+    ../../common/nixos/ssh.nix
+    # ../../common/nixos/hyprland.nix
+    ../../common/nixos/programs.nix
+    ../../common/nixos/fonts.nix
+    ../../common/nixos/nixos-vscode-server.nix
+    ../../common/nixos/tailscale.nix
+    ../../common/nixos/steam.nix
+    ../../common/nixos/gvfs.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -44,6 +44,38 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Laptop power management. TLP automatically switches between the AC and
+  # battery profiles when the power source changes.
+  powerManagement.enable = true;
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 40;
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "on";
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "auto";
+      USB_AUTOSUSPEND = 1;
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -95,7 +127,10 @@ in
   users.users."koyama" = {
     isNormalUser = true;
     description = "koyama";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     openssh.authorizedKeys.keys = sshKeys;
   };
 
@@ -110,8 +145,8 @@ in
   environment.systemPackages = with pkgs; [
     qt6Packages.fcitx5-configtool
     cifs-utils
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
   fileSystems."/mnt/nas" = {
     device = "//192.168.1.111/ru3";
@@ -129,12 +164,12 @@ in
 
   nix = {
     settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
-
-
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
