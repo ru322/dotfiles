@@ -17,6 +17,10 @@
       url = "github:boydaihungst/gvfs.yazi";
       flake = false;
     };
+    clipboard-yazi = {
+      url = "github:XYenon/clipboard.yazi";
+      flake = false;
+    };
   };
   outputs = inputs: {
     homeConfigurations = {

@@ -29,8 +29,6 @@
     bc
     ghq
     fzf
-    godot
-    yuview
     ffmpeg
   ];
 }

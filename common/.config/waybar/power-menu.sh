@@ -2,6 +2,7 @@
 
 choice=$(
   printf '%s\n' \
+    '画面ロック' \
     'スリープ' \
     '休止' \
     '再起動' |
@@ -9,6 +10,9 @@ choice=$(
 )
 
 case "$choice" in
+  '画面ロック')
+    swaylock -f
+    ;;
   'スリープ')
     systemctl suspend
     ;;

@@ -1,6 +1,14 @@
 // Satori niri configuration.
 // This file is installed as /etc/niri/config.kdl by common/nixos/niri.nix.
 
+output "HDMI-A-1" {
+    position x=0 y=0
+}
+
+output "eDP-1" {
+    position x=768 y=1728
+}
+
 input {
     keyboard {
         xkb {
@@ -89,7 +97,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+V hotkey-overlay-title="Clipboard History and Paste" { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && sleep 0.1 && wtype -M ctrl v -m ctrl"; }
-    Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock" "-f"; }
+    Mod+Alt+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock" "-f"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -108,6 +116,15 @@ binds {
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
     Mod+L { focus-column-right; }
+
+    Mod+Alt+Left { focus-monitor-left; }
+    Mod+Alt+Down { focus-monitor-down; }
+    Mod+Alt+Up { focus-monitor-up; }
+    Mod+Alt+Right { focus-monitor-right; }
+    Mod+Alt+H { focus-monitor-left; }
+    Mod+Alt+J { focus-monitor-down; }
+    Mod+Alt+K { focus-monitor-up; }
+    Mod+Alt+L { focus-monitor-right; }
 
     Mod+Ctrl+Left { move-column-left; }
     Mod+Ctrl+Down { move-window-down; }

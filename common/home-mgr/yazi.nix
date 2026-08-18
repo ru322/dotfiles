@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   xdg.mimeApps = {
     enable = true;
@@ -9,6 +9,7 @@
     enable = true;
     enableZshIntegration = true;
     shellWrapperName = "y";
+    plugins.clipboard = inputs.clipboard-yazi;
 
     settings = {
       mgr = {
@@ -65,12 +66,31 @@
 
     keymap.mgr.prepend_keymap = [
       {
-        on = [ "g" "t" ];
+        on = "y";
+        run = [
+          "yank"
+          "plugin clipboard -- --action=copy"
+        ];
+        desc = "Yank and copy to system clipboard";
+      }
+      {
+        on = "<C-p>";
+        run = "plugin clipboard -- --action=paste";
+        desc = "Paste files from system clipboard";
+      }
+      {
+        on = [
+          "g"
+          "t"
+        ];
         run = "cd /mnt/nas/TUAT/";
         desc = "Go TUAT";
       }
       {
-        on = [ "g" "g" ];
+        on = [
+          "g"
+          "g"
+        ];
         run = "cd ~/src/github.com/";
         desc = "Go GHQ";
       }
