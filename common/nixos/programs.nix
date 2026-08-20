@@ -2,6 +2,10 @@
 { pkgs, ... }:
 
 {
+  environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "0";
+  };
+
   users.defaultUserShell = pkgs.zsh;
 
   programs = {
