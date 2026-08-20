@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
-  programs.codex = {
-    enable = true;
-    package = pkgs.callPackage ../pkgs/codex.nix { };
-  };
+    programs.codex = {
+      enable = true;
+      package = pkgs.callPackage ../pkgs/codex.nix { };
+    };
+    home.packages = [ pkgs.bubblewrap ];
 }

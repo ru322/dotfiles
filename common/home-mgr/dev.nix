@@ -12,6 +12,7 @@
     gnumake
     gdb
     uv
+    python314
     docker-compose
     supabase-cli
     postgresql
