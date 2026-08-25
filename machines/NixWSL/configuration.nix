@@ -7,12 +7,16 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  sshKeys = import ../../resources/ssh-keys/koyama.nix;
+in
 {
   imports = [
     ../../common/nixos/docker.nix
     ../../common/nixos/fonts.nix
     ../../common/nixos/programs.nix
     ../../common/nixos/nixos-vscode-server.nix
+    ../../common/nixos/ssh.nix
   ];
 
   wsl.enable = true;
@@ -21,6 +25,7 @@
   users.users.nixos = {
     isNormalUser = true;
     extraGroups = ["wheel" "docker"];
+    openssh.authorizedKeys.keys = sshKeys;
   };
   nix = {
     settings = {
