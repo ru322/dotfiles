@@ -31,5 +31,6 @@
     ghq
     fzf
     ffmpeg
+    gh
   ];
 }

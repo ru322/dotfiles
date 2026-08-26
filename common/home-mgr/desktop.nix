@@ -6,5 +6,6 @@
     gimp
     godot
     yuview
+    kdePackages.kate
   ];
 }

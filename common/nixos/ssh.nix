@@ -4,6 +4,7 @@
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = true;
+      AllowAgentForwarding = true;
     };
   };
 }
