@@ -1,6 +1,6 @@
 keybind = ctrl+d=new_split:right
 
-font-family = HackGen
+font-family = HackGen Console NF
 
 background-opacity = 0.8
 background-blur = true
