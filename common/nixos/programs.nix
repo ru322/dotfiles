@@ -2,6 +2,12 @@
 { pkgs, ... }:
 
 {
+  environment.etc."codex/config.toml".text = ''
+    approval_policy = "on-request"
+    approvals_reviewer = "auto_review"
+    sandbox_mode = "workspace-write"
+  '';
+
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "0";
   };

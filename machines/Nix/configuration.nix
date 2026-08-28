@@ -66,7 +66,6 @@ in
 
   # Use GDM with Hyprland (GDM supports Wayland sessions)
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11

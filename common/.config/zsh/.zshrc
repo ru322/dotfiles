@@ -19,9 +19,16 @@ bindkey '^[[F' end-of-line
 # Deleteキー
 bindkey '^[[3~' delete-char
 
+# Ctrl+Backspaceで単語単位に削除
+# 端末によって Ctrl+Backspace の送信値が異なるため両方に対応
+bindkey '^H' backward-kill-word
+bindkey '^[^?' backward-kill-word
+
 # Ctrl+左右で単語単位に移動
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+bindkey '^[[5D' backward-word
+bindkey '^[[5C' forward-word
 
 function gcd() {
   local dir
