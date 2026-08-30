@@ -5,6 +5,7 @@
     ./fcitx5.nix
     ./fonts.nix
     ./hyprland.nix
+    ./nix.nix
     ./programs.nix
     ./ssh.nix
     ./tailscale.nix

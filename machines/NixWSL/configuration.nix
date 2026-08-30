@@ -14,6 +14,7 @@ in
   imports = [
     ../../common/nixos/docker.nix
     ../../common/nixos/fonts.nix
+    ../../common/nixos/nix.nix
     ../../common/nixos/programs.nix
     ../../common/nixos/nixos-vscode-server.nix
     ../../common/nixos/ssh.nix

@@ -22,6 +22,7 @@ in
     ./hardware-configuration.nix
     ../../common/nixos/ssh.nix
     ../../common/nixos/hyprland.nix
+    ../../common/nixos/nix.nix
     ../../common/nixos/programs.nix
     ../../common/nixos/fonts.nix
     ../../common/nixos/fcitx5.nix
