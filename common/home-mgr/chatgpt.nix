@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   home.packages = [
-    (pkgs.callPackage ../pkgs/chatgpt.nix { })
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
   ];
 }

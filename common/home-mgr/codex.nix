@@ -1,8 +1,14 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
+let
+  llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   programs.codex = {
     enable = true;
-    package = pkgs.callPackage ../pkgs/codex.nix { };
+    package = llmAgents.codex;
   };
-  home.packages = [ pkgs.bubblewrap ];
+  home.packages = [
+    llmAgents.opencode
+    pkgs.bubblewrap
+  ];
 }
