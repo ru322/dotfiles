@@ -32,5 +32,7 @@
     fzf
     ffmpeg
     gh
+    unzip
+    zip
   ];
 }

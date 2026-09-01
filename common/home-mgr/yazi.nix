@@ -46,11 +46,11 @@
             for = "linux";
           }
         ];
-        onlyoffice = [
+        libreoffice = [
           {
-            run = "onlyoffice-desktopeditors %s1";
+            run = "libreoffice %s1";
             orphan = true;
-            desc = "ONLYOFFICE";
+            desc = "LibreOffice";
             for = "linux";
           }
         ];
@@ -76,7 +76,7 @@
           mime = "application/pdf";
           use = [
             "firefox"
-            "onlyoffice"
+            "libreoffice"
           ];
         }
       ];

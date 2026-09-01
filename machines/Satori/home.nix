@@ -11,7 +11,7 @@
     ../../common/home-mgr/neovim.nix
     ../../common/home-mgr/dev.nix
     ../../common/home-mgr/desktop.nix
-    ../../common/home-mgr/onlyoffice.nix
+    ../../common/home-mgr/libreoffice.nix
     #../../common/home-mgr/sunshine.nix
     ../../common/home-mgr/wl-clipboard.nix
     ../../common/home-mgr/git.nix
