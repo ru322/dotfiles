@@ -80,7 +80,7 @@ environment {
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "swaybg" "-i" "/etc/niri/Top14.png" "-m" "fill"
-spawn-at-startup "swayidle" "-w" "timeout" "3000" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock -f"
+spawn-at-startup "swayidle" "-w" "timeout" "3000" "swaylock -f" "timeout" "3000" "niri msg action power-off-monitors" "before-sleep" "swaylock -f"
 spawn-at-startup "sh" "-c" "wl-paste --type text --watch cliphist store"
 spawn-at-startup "sh" "-c" "wl-paste --type image --watch cliphist store"
 

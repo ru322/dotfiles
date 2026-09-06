@@ -78,6 +78,13 @@ in
     };
   };
 
+  # Suspend the laptop when the lid is closed.
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "suspend";
+  };
+
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
 
