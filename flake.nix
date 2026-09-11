@@ -120,7 +120,7 @@
         modules = [
           inputs.vscode-server.nixosModules.default
           ./common/nixos/fcitx5.nix
-          ./common/nixos/niri.nix
+          ./common/nixos/gnome.nix
           ./machines/Satori/configuration.nix
         ];
       };

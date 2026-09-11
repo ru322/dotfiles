@@ -23,7 +23,7 @@
     #../../common/home-mgr/docker-cli.nix
     ../../common/home-mgr/codex.nix
     ../../common/home-mgr/chatgpt.nix
-    ../../common/home-mgr/waybar.nix
+    ../../common/home-mgr/gnome.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
     ../../common/home-mgr/obsidian.nix
