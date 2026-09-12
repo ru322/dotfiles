@@ -11,7 +11,11 @@ choice=$(
 
 case "$choice" in
   '画面ロック')
-    swaylock -f
+    if [ -r /etc/swaylock/config ]; then
+      swaylock -f -C /etc/swaylock/config
+    else
+      swaylock -f
+    fi
     ;;
   'スリープ')
     systemctl suspend

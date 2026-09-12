@@ -6,6 +6,12 @@ let
       -evaluate Multiply 0.75 \
       $out
   '';
+  lockWallpaper = pkgs.runCommand "niri-wallpaper-blurred.png" { } ''
+    ${pkgs.imagemagick}/bin/magick \
+      ${dimmedWallpaper} \
+      -blur 0x12 \
+      $out
+  '';
 in
 {
   programs.niri = {
@@ -46,6 +52,10 @@ in
 
   environment.etc."niri/config.kdl".source = ../.config/niri/config.kdl;
   environment.etc."niri/Top14.png".source = dimmedWallpaper;
+  environment.etc."swaylock/config".text = ''
+    image=${lockWallpaper}
+    scaling=fill
+  '';
 
   xdg.portal.config.niri."org.freedesktop.impl.portal.FileChooser" = "gtk";
 }
