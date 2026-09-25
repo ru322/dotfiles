@@ -77,7 +77,7 @@ environment {
     MOZ_ENABLE_WAYLAND "1"
 }
 
-spawn-at-startup "waybar"
+spawn-at-startup "quickshell"
 spawn-at-startup "mako"
 spawn-at-startup "swaybg" "-i" "/etc/niri/Top14.png" "-m" "fill"
 spawn-at-startup "swayidle" "-w" "timeout" "3000" "swaylock -f -C /etc/swaylock/config" "timeout" "3000" "niri msg action power-off-monitors" "before-sleep" "swaylock -f -C /etc/swaylock/config"

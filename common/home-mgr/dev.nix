@@ -14,6 +14,8 @@
     gdb
     uv
     python314
+    cargo
+    cloudflare-warp
     docker-compose
     supabase-cli
     postgresql

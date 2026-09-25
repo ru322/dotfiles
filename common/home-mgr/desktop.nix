@@ -15,7 +15,9 @@
   home.packages = with pkgs; [
     gimp
     godot
+    remmina
     yuview
     kdePackages.kate
+    kdePackages.dolphin
   ];
 }

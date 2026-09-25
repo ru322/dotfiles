@@ -1,32 +1,38 @@
+local commands = {
+  files = "find_files",
+  grep = "live_grep",
+  buffers = "buffers",
+  help = "help_tags",
+  recent = "oldfiles",
+  commits = "git_commits",
+  status = "git_status",
+}
+
 return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
-    keys = function()
-      local builtin = require("telescope.builtin")
-
-      return {
-        {
-          "<leader>ff",
-          function()
-            builtin.find_files({ hidden = true })
-          end,
-          desc = "Find files",
-        },
-        {
-          "<leader>fg",
-          function()
-            builtin.live_grep({ additional_args = { "--hidden" } })
-          end,
-          desc = "Live grep",
-        },
-        { "<leader>fb", builtin.buffers, desc = "Find buffers" },
-        { "<leader>fh", builtin.help_tags, desc = "Help tags" },
-        { "<leader>fr", builtin.oldfiles, desc = "Recent files" },
-        { "<leader>fc", builtin.git_commits, desc = "Git commits" },
-        { "<leader>fs", builtin.git_status, desc = "Git status" },
-      }
+    cmd = "Telescope",
+    init = function()
+      for command, picker in pairs(commands) do
+        -- Only expand a complete command, never text in a search or argument.
+        vim.keymap.set("ca", command, function()
+          if vim.fn.getcmdtype() == ":"
+            and vim.fn.getcmdline() == command
+            and vim.fn.getcmdpos() == #command + 1
+          then
+            return "Telescope " .. picker
+          end
+          return command
+        end, { expr = true, desc = "Telescope " .. picker })
+      end
     end,
+    opts = {
+      pickers = {
+        find_files = { hidden = true },
+        live_grep = { additional_args = { "--hidden" } },
+      },
+    },
   },
 }

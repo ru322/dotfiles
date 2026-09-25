@@ -20,7 +20,7 @@ in
   environment.systemPackages = with pkgs; [
     kitty # Terminal
     wofi # App launcher
-    waybar # Status bar
+    quickshell # Status bar
     dunst # Notifications
     hyprpaper # Wallpaper
     wl-clipboard # Clipboard

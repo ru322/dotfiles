@@ -44,7 +44,7 @@ in
     swaybg
     swayidle
     swaylock
-    waybar
+    quickshell
     wl-clipboard
     wtype
     xwayland-satellite

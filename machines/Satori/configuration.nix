@@ -45,6 +45,7 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  services.cloudflare-warp.enable = true;
 
   # Laptop power management. TLP automatically switches between the AC and
   # battery profiles when the power source changes.
