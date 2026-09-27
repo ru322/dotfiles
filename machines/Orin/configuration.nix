@@ -3,39 +3,29 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  sshKeys = import ../../resources/ssh-keys/koyama.nix;
+let 
+    sshKeys = import ../../resources/ssh-keys/koyama.nix;
 in
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ../../common/nixos/ssh.nix
-    # ../../common/nixos/hyprland.nix
-    ../../common/nixos/nix.nix
-    ../../common/nixos/programs.nix
-    ../../common/nixos/fonts.nix
-    ../../common/nixos/nixos-vscode-server.nix
-    ../../common/nixos/tailscale.nix
-    ../../common/nixos/steam.nix
-    ../../common/nixos/gvfs.nix
-  ];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+ 
+      ../../common/nixos/ssh.nix
+      # ../../common/nixos/hyprland.nix
+      ../../common/nixos/nix.nix
+      ../../common/nixos/programs.nix
+      ../../common/nixos/fonts.nix
+      ../../common/nixos/nixos-vscode-server.nix
+      ../../common/nixos/tailscale.nix
+      ../../common/nixos/gvfs.nix
+    ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # Let systemd discover the swapfile's resume offset and pass it through
-  # the HibernateLocation EFI variable when hibernating.
-  boot.initrd.systemd.enable = true;
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-    }
-  ];
-
-  networking.hostName = "satori"; # Define your hostname.
+  networking.hostName = "Orin"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -44,46 +34,6 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-  services.cloudflare-warp.enable = true;
-
-  # Laptop power management. TLP automatically switches between the AC and
-  # battery profiles when the power source changes.
-  powerManagement.enable = true;
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 40;
-
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
-
-      PLATFORM_PROFILE_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_BAT = "low-power";
-
-      WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
-      RUNTIME_PM_ON_AC = "on";
-      RUNTIME_PM_ON_BAT = "auto";
-      USB_AUTOSUSPEND = 1;
-    };
-  };
-
-  # Suspend the laptop when the lid is closed.
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
-    HandleLidSwitchExternalPower = "suspend";
-    HandleLidSwitchDocked = "suspend";
-  };
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -102,6 +52,13 @@ in
     LC_TELEPHONE = "ja_JP.UTF-8";
     LC_TIME = "ja_JP.UTF-8";
   };
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -132,14 +89,19 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."koyama" = {
+  users.users.koyama = {
     isNormalUser = true;
     description = "koyama";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = sshKeys;
+  };
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 
   # Install firefox.
@@ -151,33 +113,9 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    qt6Packages.fcitx5-configtool
-    cifs-utils
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  #  wget
   ];
-  fileSystems."/mnt/nas" = {
-    device = "//192.168.1.111/ru3";
-    fsType = "cifs";
-    options =
-      let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [
-        "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100,file_mode=0644,dir_mode=0755"
-        "nofail"
-      ];
-  };
-
-  nix = {
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -207,4 +145,3 @@ in
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
