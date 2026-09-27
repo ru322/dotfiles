@@ -30,6 +30,7 @@
     bison
     tshark
     tmux
+    zellij
     bc
     ghq
     fzf
