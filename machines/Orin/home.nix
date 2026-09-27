@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home = rec {
     username = "koyama";
@@ -6,6 +6,19 @@
     stateVersion = "22.11";
   };
   programs.home-manager.enable = true;
+
+  # Keep SSH available while GNOME blanks and locks the screen normally.
+  dconf.settings = {
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-type = "nothing";
+    };
+    "org/gnome/desktop/session".idle-delay = lib.hm.gvariant.mkUint32 300;
+    "org/gnome/desktop/screensaver" = {
+      lock-enabled = true;
+      lock-delay = lib.hm.gvariant.mkUint32 0;
+    };
+  };
 
   imports = [
     ../../common/home-mgr/neovim.nix

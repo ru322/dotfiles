@@ -35,6 +35,14 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Keep the SSH host awake; closing the lid only locks the desktop.
+  services.logind.settings.Login = {
+    IdleAction = "ignore";
+    HandleLidSwitch = "lock";
+    HandleLidSwitchExternalPower = "lock";
+    HandleLidSwitchDocked = "lock";
+  };
+
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
 
