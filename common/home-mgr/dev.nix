@@ -38,5 +38,7 @@
     gh
     unzip
     zip
+    gtkwave
+    iverilog
   ];
 }
