@@ -78,7 +78,6 @@
         };
         modules = [
           ./machines/Satori/home.nix
-          ./common/home-mgr/ghostty.nix
         ];
       };
       Sakura = inputs.home-manager.lib.homeManagerConfiguration {

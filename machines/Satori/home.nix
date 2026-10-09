@@ -60,6 +60,8 @@
     ../../common/home-mgr/steam.nix
     ../../common/home-mgr/obsidian.nix
     ../../common/home-mgr/unity.nix
+    ../../common/home-mgr/ghostty.nix
+    ../../common/home-mgr/kitty.nix
   ];
 
   # Hyprland config

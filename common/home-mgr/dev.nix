@@ -40,5 +40,6 @@
     zip
     gtkwave
     iverilog
+    lazygit
   ];
 }
