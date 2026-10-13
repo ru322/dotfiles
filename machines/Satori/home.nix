@@ -62,6 +62,7 @@
     ../../common/home-mgr/unity.nix
     ../../common/home-mgr/ghostty.nix
     ../../common/home-mgr/kitty.nix
+    ../../common/home-mgr/claude.nix
   ];
 
   # Hyprland config
