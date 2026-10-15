@@ -7,7 +7,7 @@
   };
   programs.home-manager.enable = true;
 
-  dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.25;
+  dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.0;
 
   # GNOME stores per-monitor fractional scaling separately from dconf.
   xdg.configFile."monitors.xml" = {

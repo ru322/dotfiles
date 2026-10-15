@@ -15,20 +15,13 @@ in
 
   xdg.configFile."fcitx5/config".text = ''
     [Behavior]
-    ActiveByDefault=True
+    ActiveByDefault=False
 
     [Hotkey/TriggerKeys]
     0=Zenkaku_Hankaku
     1=Control+space
   '';
 
-  # Keep Mozc in Hiragana when Fcitx activates Japanese input.
-  xdg.configFile."fcitx5/conf/mozc.conf" = {
-    force = true;
-    text = ''
-      InitialMode=Hiragana
-    '';
-  };
 
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
@@ -56,7 +49,6 @@ in
 
     "org/gnome/desktop/screensaver" = {
       picture-uri = wallpaperUri;
-      picture-options = "zoom";
     };
 
     "org/gnome/desktop/wm/preferences" = {
