@@ -22,6 +22,8 @@
     keybindings = {
       "ctrl+shift+t" = "new_tab_with_cwd";
       "ctrl+shift+enter" = "new_window_with_cwd";
+      "ctrl+page_up" = "previous_tab";
+      "ctrl+page_down" = "next_tab";
     };
   };
 }
