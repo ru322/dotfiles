@@ -19,5 +19,6 @@
     yuview
     kdePackages.kate
     kdePackages.dolphin
+    moonlight-qt
   ];
 }

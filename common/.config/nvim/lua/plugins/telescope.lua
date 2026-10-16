@@ -6,13 +6,18 @@ local commands = {
   recent = "oldfiles",
   commits = "git_commits",
   status = "git_status",
+  symbols = "lsp_document_symbols",
+  wsymbols = "lsp_dynamic_workspace_symbols",
+  diag = "diagnostics",
 }
 
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     cmd = "Telescope",
     init = function()
       for command, picker in pairs(commands) do
@@ -34,5 +39,10 @@ return {
         live_grep = { additional_args = { "--hidden" } },
       },
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      telescope.load_extension("fzf")
+    end,
   },
 }

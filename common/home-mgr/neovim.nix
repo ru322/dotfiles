@@ -10,6 +10,9 @@
       nodejs
       wl-clipboard
       ripgrep
+      tree-sitter
+      gcc
+      gnumake
       python3
     ];
   };

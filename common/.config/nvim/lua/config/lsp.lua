@@ -11,9 +11,13 @@ function M.capabilities()
   return capabilities
 end
 
-function M.on_attach(bufnr)
+function M.on_attach(client, bufnr)
   local opts = { buffer = bufnr }
   local set = vim.keymap.set
+
+  if client:supports_method("textDocument/inlayHint") then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
 
   set("n", "gD", vim.lsp.buf.declaration, opts)
   set("n", "gd", vim.lsp.buf.definition, opts)
@@ -36,6 +40,9 @@ function M.on_attach(bufnr)
   set("n", "[d", vim.diagnostic.goto_prev, opts)
   set("n", "]d", vim.diagnostic.goto_next, opts)
   set("n", "<space>q", vim.diagnostic.setloclist, opts)
+  set("n", "<space>ih", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+  end, opts)
 end
 
 return M
