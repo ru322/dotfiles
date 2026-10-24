@@ -18,6 +18,7 @@
     ../../common/home-mgr/yazi.nix
     ../../common/home-mgr/yazi-gvfs.nix
     ../../common/home-mgr/zsh.nix
+    ../../common/home-mgr/fish.nix
   ];
 
   # Hyprland config

@@ -51,6 +51,7 @@
     ../../common/home-mgr/yazi.nix
     ../../common/home-mgr/yazi-gvfs.nix
     ../../common/home-mgr/zsh.nix
+    ../../common/home-mgr/fish.nix
     #../../common/home-mgr/nixos-vscoder-server.nix
     #../../common/home-mgr/docker-cli.nix
     ../../common/home-mgr/codex.nix
