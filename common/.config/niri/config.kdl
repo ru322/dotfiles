@@ -78,13 +78,30 @@ environment {
     MOZ_ENABLE_WAYLAND "1"
 }
 
-spawn-at-startup "quickshell"
-spawn-at-startup "mako"
+spawn-at-startup "noctalia"
 spawn-at-startup "fcitx5" "-d"
-spawn-at-startup "swaybg" "-i" "/etc/niri/Top14.png" "-m" "fill"
-spawn-at-startup "swayidle" "-w" "timeout" "3000" "swaylock -f -C /etc/swaylock/config" "timeout" "3000" "niri msg action power-off-monitors" "before-sleep" "swaylock -f -C /etc/swaylock/config"
-spawn-at-startup "sh" "-c" "wl-paste --type text --watch cliphist store"
-spawn-at-startup "sh" "-c" "wl-paste --type image --watch cliphist store"
+
+// Keep noctalia's wallpaper still behind the overview.
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+}
+
+// Lets noctalia notification actions focus the window they belong to.
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
 
 window-rule {
     geometry-corner-radius 10
@@ -95,16 +112,18 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+V hotkey-overlay-title="Clipboard History and Paste" { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy && sleep 0.1 && wtype -M ctrl v -m ctrl"; }
-    Mod+Alt+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock" "-f" "-C" "/etc/swaylock/config"; }
+    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S hotkey-overlay-title="Control Center" { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Comma hotkey-overlay-title="Noctalia Settings" { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+V hotkey-overlay-title="Clipboard History" { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+Alt+Shift+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
     XF86AudioMicMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
     Mod+Q repeat=false { close-window; }
 

@@ -25,7 +25,7 @@
     ../../common/home-mgr/codex.nix
     ../../common/home-mgr/chatgpt.nix
     ../../common/home-mgr/niri.nix
-    ../../common/home-mgr/quickshell.nix
+    ../../common/home-mgr/noctalia.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
     ../../common/home-mgr/obsidian.nix
