@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   dimmedWallpaper = pkgs.runCommand "niri-wallpaper-dimmed.png" { } ''
     ${pkgs.imagemagick}/bin/magick \
@@ -42,5 +42,7 @@ in
   environment.etc."niri/config.kdl".source = ../.config/niri/config.kdl;
   environment.etc."niri/Top14.png".source = dimmedWallpaper;
 
-  xdg.portal.config.niri."org.freedesktop.impl.portal.FileChooser" = "gtk";
+  # File chooser runs yazi in a terminal (configured in common/home-mgr/niri.nix).
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
+  xdg.portal.config.niri."org.freedesktop.impl.portal.FileChooser" = lib.mkForce "termfilechooser";
 }

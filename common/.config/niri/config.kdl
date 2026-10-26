@@ -98,6 +98,14 @@ window-rule {
     open-floating true
 }
 
+// yazi launched as the file chooser by xdg-desktop-portal-termfilechooser.
+window-rule {
+    match title="^termfilechooser$"
+    open-floating true
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.6; }
+}
+
 // Lets noctalia notification actions focus the window they belong to.
 debug {
     honor-xdg-activation-with-invalid-serial

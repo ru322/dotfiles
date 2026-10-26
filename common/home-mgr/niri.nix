@@ -20,4 +20,14 @@
 
   # GTK/libadwaita apps read the dark preference from dconf even outside GNOME.
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+  # Used by xdg-desktop-portal-termfilechooser (enabled in common/nixos/niri.nix).
+  # The wrapper opens yazi in `kitty --title termfilechooser`.
+  xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+    [filechooser]
+    cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+    default_dir=$HOME
+    open_mode=suggested
+    save_mode=suggested
+  '';
 }
