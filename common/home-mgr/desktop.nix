@@ -20,5 +20,6 @@
     kdePackages.kate
     kdePackages.dolphin
     moonlight-qt
+    spotify-player
   ];
 }

@@ -8,6 +8,7 @@
         expansion = "git commit -m \"%\"";
       };
       lg = "lazygit";
+      sp = "spotify_player";
     };
     functions = {
       gcd = ''
