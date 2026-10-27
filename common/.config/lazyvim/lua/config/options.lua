@@ -4,7 +4,6 @@
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.background = "dark"
 
 -- basedpyright for type checking, ruff for lint and format.
 vim.g.lazyvim_python_lsp = "basedpyright"

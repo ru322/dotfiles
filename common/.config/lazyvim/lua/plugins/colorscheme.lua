@@ -1,28 +1,15 @@
 return {
   {
-    "maxmx03/solarized.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
-  {
-    "xiyaowong/transparent.nvim",
-    lazy = false,
-    init = function()
-      vim.g.transparent_enabled = true
-    end,
+    "folke/tokyonight.nvim",
+    -- Match kitty's tokyo_night_night theme and let the wallpaper show through,
+    -- floats (pickers, hover, completion) included.
     opts = {
-      extra_groups = {
-        "NeoTreeNormal",
-        "NeoTreeNormalNC",
-        "NeoTreeEndOfBuffer",
+      style = "night",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
       },
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "solarized",
     },
   },
 }

@@ -1,27 +1,21 @@
 return {
   {
-    "maxmx03/solarized.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
-    config = function(_, opts)
-      vim.o.background = "dark"
-      require("solarized").setup(opts)
-      vim.cmd.colorscheme("solarized")
-    end,
-  },
-  {
-    "xiyaowong/transparent.nvim",
-    lazy = false,
-    init = function()
-      vim.g.transparent_enabled = true
-    end,
+    -- Match kitty's tokyo_night_night theme and let the wallpaper show through,
+    -- floats (Telescope, hover, completion) included.
     opts = {
-      extra_groups = {
-        "NvimTreeNormal",
-        "NvimTreeNormalNC",
-        "NvimTreeEndOfBuffer",
+      style = "night",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
       },
     },
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
+    end,
   },
 }
