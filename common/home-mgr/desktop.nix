@@ -22,5 +22,6 @@
     moonlight-qt
     spotify-player
     zed-editor
+    sqlitebrowser
   ];
 }

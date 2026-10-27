@@ -41,5 +41,6 @@
     gtkwave
     iverilog
     lazygit
+    sqlite
   ];
 }
