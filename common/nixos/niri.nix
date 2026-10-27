@@ -35,6 +35,7 @@ in
     alacritty
     brightnessctl
     wl-clipboard
+    setxkbmap
     wtype
     xwayland-satellite
   ];

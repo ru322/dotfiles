@@ -82,6 +82,8 @@ environment {
 
 spawn-at-startup "noctalia"
 spawn-at-startup "fcitx5" "-d"
+// Xwayland starts with a US keymap; X11 apps (and VS Code's layout detection) read it.
+spawn-at-startup "setxkbmap" "jp"
 
 // Keep noctalia's wallpaper still behind the overview.
 layer-rule {
