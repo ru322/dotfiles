@@ -1,53 +1,49 @@
 # dotfiles
 
-Personal dotfiles managed with environment-based symlinks.
+NixOS / Home Manager の個人設定。flake で管理しています。
 
-## Structure
+## 構成
 
 ```
-common/    # Shared across all environments (nvim, kitty, bashrc_common)
-linux/     # Pure Linux settings (sway, bashrc_linux)
-wsl/       # WSL-specific settings
-windows/   # Windows-specific settings
-bin/       # Custom scripts (added to PATH)
+flake.nix           # マシンごとの nixosConfigurations と homeConfigurations
+machines/<name>/    # configuration.nix, hardware-configuration.nix, home.nix
+common/nixos/       # 共通の NixOS モジュール (niri, fonts, fcitx5, docker, ...)
+common/home-mgr/    # 共通の Home Manager モジュール (fish, kitty, neovim, noctalia, ...)
+common/.config/     # 上記モジュールから配置する設定ファイル
+resources/          # 壁紙、SSH 公開鍵
 ```
 
-## Install
+マシン: `Satori`, `Alice`, `Nix`, `NixWSL`, `Orin` (NixOS + Home Manager)、
+`Sakura` (Home Manager のみ)
 
-### Linux / WSL
+## 適用
 
 ```bash
 git clone <repo> ~/dotfiles
 cd ~/dotfiles
-bash install.sh
+sudo nixos-rebuild switch --flake path:.#<machine>
+home-manager switch --flake path:.#<machine>
 ```
 
-### Windows (PowerShell as Administrator)
+`path:` を付けると、Git に add する前の新規ファイルも含めて評価されます。
 
-```powershell
-git clone <repo> ~\dotfiles
-cd ~\dotfiles
-.\install.ps1
-```
+## Satori のデスクトップ
 
-## How it works
+niri + noctalia (バー、ランチャー、通知、ロック画面、壁紙) で、tuigreet から起動します。
+niri の設定は `common/nixos/niri.nix` が `/etc/niri/config.kdl` に配置するので、
+`nixos-rebuild` で反映されます。
 
-`install.sh` detects the environment (linux/wsl/mac) and creates symlinks from `common/` and the environment-specific folder to `$HOME`. It also generates `~/.bashrc` that sources the appropriate bashrc files.
+## Neovim
 
-## Satori desktop
+2 つの設定を共存させています。
 
-Satori uses GNOME with GDM, configured in `common/nixos/gnome.nix`.
-Home Manager loads `common/home-mgr/gnome.nix` for the wallpaper, dark theme,
-Japanese keyboard layout, and desktop shortcuts.
+- `nvim` — 自作の設定 (`common/.config/nvim`)
+- `lv` (`NVIM_APPNAME=lazyvim nvim` の fish abbr) — LazyVim (`common/.config/lazyvim`)
 
-Apply both configurations from this directory (the `path:` reference also includes
-new files before they are added to Git):
+プラグインは Nix ではなく lazy.nvim で管理します。LazyVim の `lazy-lock.json` は
+このリポジトリに直接書き込まれるので、プラグインのバージョンも Git で追跡されます。
 
-```bash
-sudo nixos-rebuild switch --flake path:.#Satori
-home-manager switch --flake path:.#Satori
-```
+## 旧インストーラー
 
-Switching the display manager may end the current graphical session; save your
-work before applying the system configuration. Log in to GNOME through GDM
-after applying both configurations, or reboot if needed.
+`install.sh` / `install.ps1` は Nix を使わない環境向けの旧シンボリックリンク方式の
+インストーラーで、現在はメンテしていません。
