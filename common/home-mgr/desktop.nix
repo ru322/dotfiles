@@ -21,5 +21,6 @@
     kdePackages.dolphin
     moonlight-qt
     spotify-player
+    zed-editor
   ];
 }
