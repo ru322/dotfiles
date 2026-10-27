@@ -6,6 +6,8 @@
     settings = {
       theme.mode = "dark";
 
+      bar.default.background_opacity = 0.5;
+
       # Installed by common/nixos/niri.nix.
       wallpaper.default.path = "/etc/niri/Top14.png";
 

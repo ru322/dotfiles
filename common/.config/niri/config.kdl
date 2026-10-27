@@ -36,6 +36,8 @@ window-rule {
 }
 layout {
     gaps 12
+    // Show noctalia's wallpaper, which lives in the backdrop (see layer-rule below).
+    background-color "transparent"
     center-focused-column "never"
 
     preset-column-widths {

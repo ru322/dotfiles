@@ -6,7 +6,7 @@
     font.size = 12;
     themeFile = "tokyo_night_night";
     settings = {
-      background_opacity = "0.8";
+      background_opacity = "0.9";
       tab_bar_edge = "left";
       tab_bar_style = "separator";
       tab_separator = "\"\"";
