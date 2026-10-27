@@ -9,6 +9,7 @@
       };
       lg = "lazygit";
       sp = "spotify_player";
+      lv = "NVIM_APPNAME=lazyvim nvim";
     };
     functions = {
       gcd = ''

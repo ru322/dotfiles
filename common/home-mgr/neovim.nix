@@ -10,6 +10,7 @@
       nodejs
       wl-clipboard
       ripgrep
+      fd
       tree-sitter
       gcc
       gnumake
@@ -19,6 +20,12 @@
 
   xdg.configFile."nvim" = {
     source = ../.config/nvim;
+    recursive = true;
+  };
+
+  # LazyVim lives side by side: launch with NVIM_APPNAME=lazyvim (fish abbr `lv`).
+  xdg.configFile."lazyvim" = {
+    source = ../.config/lazyvim;
     recursive = true;
   };
 
