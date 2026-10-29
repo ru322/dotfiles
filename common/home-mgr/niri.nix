@@ -18,6 +18,29 @@
     1=Control+space
   '';
 
+  # fcitx5 forwards keys with the group layout, so a "us" default makes
+  # Xwayland apps (e.g. Unity) see a US keymap. Read-only: configtool can't save.
+  xdg.configFile."fcitx5/profile" = {
+    force = true;
+    text = ''
+      [Groups/0]
+      Name=Default
+      Default Layout=jp
+      DefaultIM=mozc
+
+      [Groups/0/Items/0]
+      Name=keyboard-jp
+      Layout=
+
+      [Groups/0/Items/1]
+      Name=mozc
+      Layout=jp
+
+      [GroupOrder]
+      0=Default
+    '';
+  };
+
   # GTK/libadwaita apps read the dark preference from dconf even outside GNOME.
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
