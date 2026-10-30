@@ -11,6 +11,14 @@
       # Installed by common/nixos/niri.nix.
       wallpaper.default.path = "/etc/niri/Top14.png";
 
+      # Slideshow from ~/Pictures/Wallpapers.
+      wallpaper.directory = "~/Pictures/Wallpapers";
+      wallpaper.automation = {
+        enabled = true;
+        interval_seconds = 1800;
+        order = "random";
+      };
+
       idle.behavior = {
         lock = {
           enabled = true;
