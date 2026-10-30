@@ -35,7 +35,7 @@ window-rule {
     draw-border-with-background false
 }
 layout {
-    gaps 12
+    gaps 2
     // Show noctalia's wallpaper, which lives in the backdrop (see layer-rule below).
     background-color "transparent"
     center-focused-column "never"
@@ -51,7 +51,7 @@ layout {
     }
 
     focus-ring {
-        width 3
+        width 1
         active-color "#7fc8ff"
         inactive-color "#505050"
     }
@@ -61,10 +61,10 @@ layout {
     }
 
     struts {
-        left 4
-        right 4
-        top 4
-        bottom 4
+        left 0
+        right 0
+        top 0
+        bottom 0
     }
 }
 
@@ -118,6 +118,8 @@ debug {
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
+    // Don't fill the focus ring color behind translucent windows (kitty, Firefox).
+    draw-border-with-background false
 }
 
 binds {
