@@ -49,6 +49,16 @@
         #tabbrowser-tabpanels {
           opacity: 0.8 !important;
         }
+        /* URL/search bar; a bit denser while the dropdown is open so results
+           stay readable over page text (backdrop-filter doesn't blur pages). */
+        .urlbar-background,
+        #searchbar {
+          background-color: color-mix(in srgb, var(--urlbar-background-color) 50%, transparent) !important;
+        }
+        .urlbar:is([focused], [open]) > .urlbar-background,
+        #searchbar:focus-within {
+          background-color: color-mix(in srgb, var(--urlbar-background-color-focus) 70%, transparent) !important;
+        }
         /* Selected tab: half its color, without the opaque toolbox layer under it. */
         #tabbrowser-tabs {
           --selected-tab-bg-orig: var(--tab-background-color-selected);

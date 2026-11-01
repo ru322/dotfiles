@@ -19,6 +19,14 @@
         order = "random";
       };
 
+      # Blurred copy of the wallpaper; niri shows it instead of the sharp one
+      # (see layer-rules in common/.config/niri/config.kdl).
+      backdrop = {
+        enabled = true;
+        blur_intensity = 0.5;
+        tint_intensity = 0.0;
+      };
+
       idle.behavior = {
         lock = {
           enabled = true;

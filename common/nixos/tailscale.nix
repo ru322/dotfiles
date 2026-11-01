@@ -5,7 +5,8 @@
     useRoutingFeatures = "client";
     extraSetFlags = [
         "--accept-routes=true"
-    ];  
+        "--operator=koyama"
+    ];
   };
   networking.firewall = {
     enable = true;
