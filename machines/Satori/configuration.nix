@@ -50,6 +50,10 @@ in
   # Laptop power management. TLP automatically switches between the AC and
   # battery profiles when the power source changes.
   powerManagement.enable = true;
+  # Pause MPD before suspend so music doesn't resume on wake (MPD listens on 127.0.0.1:6600).
+  powerManagement.powerDownCommands = ''
+    ${pkgs.mpc}/bin/mpc -q -h 127.0.0.1 pause || true
+  '';
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
