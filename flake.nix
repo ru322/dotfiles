@@ -29,6 +29,10 @@
       url = "github:XYenon/clipboard.yazi";
       flake = false;
     };
+    nix-hazkey = {
+      url = "github:aster-void/nix-hazkey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs: {
     homeConfigurations = {
@@ -128,9 +132,12 @@
       };
       Satori = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
         modules = [
           inputs.vscode-server.nixosModules.default
-          ./common/nixos/fcitx5.nix
+          ./common/nixos/hazkey.nix
           ./common/nixos/niri.nix
           ./machines/Satori/configuration.nix
         ];

@@ -26,14 +26,14 @@
       [Groups/0]
       Name=Default
       Default Layout=jp
-      DefaultIM=mozc
+      DefaultIM=hazkey
 
       [Groups/0/Items/0]
       Name=keyboard-jp
       Layout=
 
       [Groups/0/Items/1]
-      Name=mozc
+      Name=hazkey
       Layout=jp
 
       [GroupOrder]
