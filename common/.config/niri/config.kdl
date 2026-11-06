@@ -34,6 +34,11 @@ window-rule {
     opacity 0.90
     draw-border-with-background false
 }
+window-rule {
+    match app-id="^jetbrains-rider$"
+    opacity 0.90
+    draw-border-with-background false
+}
 layout {
     gaps 2
     // Show noctalia's wallpaper, which lives in the backdrop (see layer-rule below).
@@ -130,7 +135,8 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+E hotkey-overlay-title="Open File Manager: yazi" { spawn "kitty" "--class" "kitty-yazi" "yazi"; }
     Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S hotkey-overlay-title="Control Center" { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Comma hotkey-overlay-title="Noctalia Settings" { spawn-sh "noctalia msg settings-toggle"; }
@@ -195,6 +201,11 @@ binds {
     Mod+Ctrl+Page_Up { move-column-to-workspace-up; }
     Mod+Ctrl+U { move-column-to-workspace-down; }
     Mod+Ctrl+I { move-column-to-workspace-up; }
+
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up { move-workspace-up; }
+    Mod+Shift+U { move-workspace-down; }
+    Mod+Shift+I { move-workspace-up; }
 
     Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
