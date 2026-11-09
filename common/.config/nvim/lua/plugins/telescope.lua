@@ -6,9 +6,6 @@ local commands = {
   recent = "oldfiles",
   commits = "git_commits",
   status = "git_status",
-  symbols = "lsp_document_symbols",
-  wsymbols = "lsp_dynamic_workspace_symbols",
-  diag = "diagnostics",
 }
 
 return {
@@ -19,6 +16,11 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     cmd = "Telescope",
+    -- Same keys as LazyVim.
+    keys = {
+      { "<leader><space>", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+      { "<leader>/", "<cmd>Telescope live_grep<CR>", desc = "Grep" },
+    },
     init = function()
       for command, picker in pairs(commands) do
         -- Only expand a complete command, never text in a search or argument.

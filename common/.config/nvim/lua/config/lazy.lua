@@ -24,10 +24,16 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- The config dir is a read-only symlink into the Nix store, so write the
+-- lockfile straight into the dotfiles repo to keep it under git.
+local repo_lockfile = vim.fn.expand("~/dotfiles/common/.config/nvim/lazy-lock.json")
+local lockfile = vim.fn.isdirectory(vim.fs.dirname(repo_lockfile)) == 1 and repo_lockfile
+  or vim.fn.stdpath("data") .. "/lazy-lock.json"
+
 require("lazy").setup({
   spec = {
-    { import = "plugins.spec" },
+    { import = "plugins" },
   },
-  checker = { enabled = true },
-  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+  checker = { enabled = true, notify = false },
+  lockfile = lockfile,
 })

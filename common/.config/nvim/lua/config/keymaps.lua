@@ -17,3 +17,9 @@ vim.keymap.set("t", "<M-Left>", [[<C-\><C-n><C-w>h]], { desc = "Move to left win
 vim.keymap.set("t", "<M-Down>", [[<C-\><C-n><C-w>j]], { desc = "Move to lower window" })
 vim.keymap.set("t", "<M-Up>", [[<C-\><C-n><C-w>k]], { desc = "Move to upper window" })
 vim.keymap.set("t", "<M-Right>", [[<C-\><C-n><C-w>l]], { desc = "Move to right window" })
+
+-- Built-in commenting (gc / gcc).
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("x", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("n", "<C-_>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("x", "<C-_>", "gc", { remap = true, desc = "Toggle comment" })

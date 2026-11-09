@@ -57,10 +57,10 @@ matlab   # 初回起動時に MathWorks アカウントでサインインして�
 
 2 つの設定を共存させています。
 
-- `nvim` — 自作の設定 (`common/.config/nvim`)
+- `nvim` — 軽い編集用の最小構成 (`common/.config/nvim`)。LSP なし、補完・検索・git 差分だけ
 - `lv` (`NVIM_APPNAME=lazyvim nvim` の fish abbr) — LazyVim (`common/.config/lazyvim`)
 
-プラグインは Nix ではなく lazy.nvim で管理します。LazyVim の `lazy-lock.json` は
+プラグインは Nix ではなく lazy.nvim で管理します。どちらの `lazy-lock.json` も
 このリポジトリに直接書き込まれるので、プラグインのバージョンも Git で追跡されます。
 
 ## 旧インストーラー
