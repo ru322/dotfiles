@@ -33,6 +33,26 @@ niri + noctalia (バー、ランチャー、通知、ロック画面、壁紙) �
 niri の設定は `common/nixos/niri.nix` が `/etc/niri/config.kdl` に配置するので、
 `nixos-rebuild` で反映されます。
 
+## MATLAB (Satori)
+
+MATLAB は distrobox (podman) のコンテナ内で動かします。Nix が管理するのは
+コンテナ定義 (`common/home-mgr/matlab.nix`) とランチャーの `matlab` コマンドだけで、
+本体はライセンス認証が必要なため初回に手動でインストールします。
+インストール先は `$HOME` 配下なので、コンテナを作り直しても消えません。
+
+```bash
+distrobox assemble create --file ~/.config/distrobox/containers.ini  # 通常は HM の systemd ユニットが実行済み
+distrobox enter matlab
+wget https://www.mathworks.com/mpm/glnxa64/mpm && chmod +x mpm
+./mpm install --release=R2026b \
+  --destination=$HOME/.local/opt/MATLAB/R2026b \
+  --products MATLAB   # 必要な Toolbox を追加
+exit
+matlab   # 初回起動時に MathWorks アカウントでサインインしてライセンス認証
+```
+
+リリースを変えるときは `matlab.nix` の `release` とイメージのタグを合わせて変更します。
+
 ## Neovim
 
 2 つの設定を共存させています。

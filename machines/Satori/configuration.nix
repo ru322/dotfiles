@@ -19,6 +19,7 @@ in
     ../../common/nixos/tailscale.nix
     ../../common/nixos/steam.nix
     ../../common/nixos/gvfs.nix
+    ../../common/nixos/podman.nix
   ];
 
   # Bootloader.
