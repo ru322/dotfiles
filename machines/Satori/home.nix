@@ -34,6 +34,7 @@
     ../../common/home-mgr/ghostty.nix
     ../../common/home-mgr/kitty.nix
     ../../common/home-mgr/claude.nix
+    ../../common/home-mgr/matlab.nix
   ];
 
   # Hyprland config
