@@ -47,6 +47,13 @@ in
   networking.networkmanager.enable = true;
   services.cloudflare-warp.enable = true;
 
+  # Bluetooth (BlueZ) with blueman for pairing from the desktop.
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
   # Laptop power management. TLP automatically switches between the AC and
   # battery profiles when the power source changes.
   powerManagement.enable = true;
@@ -80,6 +87,8 @@ in
       RUNTIME_PM_ON_AC = "on";
       RUNTIME_PM_ON_BAT = "auto";
       USB_AUTOSUSPEND = 1;
+      # Keep the USB Bluetooth adapter awake so devices don't drop.
+      USB_EXCLUDE_BTUSB = 1;
     };
   };
 
