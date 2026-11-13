@@ -15,6 +15,7 @@ in
       hack-font
       hackgen-nf-font
       nerd-fonts."m+"
+      azuki
     ];
     fontDir.enable = true;
     fontconfig.defaultFonts = {

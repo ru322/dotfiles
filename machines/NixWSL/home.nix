@@ -22,6 +22,7 @@
     #../../common/home-mgr/docker-cli.nix
     ../../common/home-mgr/codex.nix
     ../../common/home-mgr/claude.nix
+    ../../common/home-mgr/t3code.nix
   ];
 
   # Hyprland config

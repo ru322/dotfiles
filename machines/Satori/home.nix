@@ -35,6 +35,7 @@
     ../../common/home-mgr/ghostty.nix
     ../../common/home-mgr/kitty.nix
     ../../common/home-mgr/claude.nix
+    ../../common/home-mgr/t3code.nix
     ../../common/home-mgr/matlab.nix
     ../../common/home-mgr/music.nix
   ];

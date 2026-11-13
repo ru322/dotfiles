@@ -51,6 +51,24 @@ exit
 matlab   # 初回起動時に MathWorks アカウントでサインインしてライセンス認証
 ```
 
+### Toolbox・Simulink などの追加
+
+MathWorks 製品は Add-On Explorer から入れられません。製品を選ぶと MATLAB が終了して
+後段の `AddOnInstaller` に引き継ぐ仕組みですが、`distrobox enter` のセッションが
+MATLAB と一緒に終わるため、インストーラも途中で消えます。代わりに MATLAB を終了してから
+`mpm` で追加します (`mpm` は上の手順で取得したものをそのまま使えます)。
+
+```bash
+distrobox enter matlab
+./mpm install --release=R2026b \
+  --destination=$HOME/.local/opt/MATLAB/R2026b \
+  --products Simulink Control_System_Toolbox   # 製品名のスペースは _
+exit
+```
+
+File Exchange などのコミュニティ製アドオンは MATLAB を終了せずに入るので、
+Add-On Explorer からそのまま入れられます。
+
 リリースを変えるときは `matlab.nix` の `release` とイメージのタグを合わせて変更します。
 
 ## Neovim
