@@ -40,6 +40,7 @@
     ../../common/home-mgr/gnome.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
+    ../../common/home-mgr/steam-run.nix
     ../../common/home-mgr/obsidian.nix
     ../../common/home-mgr/unity.nix
   ];
