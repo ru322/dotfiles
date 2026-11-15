@@ -30,6 +30,8 @@
     ../../common/home-mgr/noctalia.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
+    ../../common/home-mgr/minecraft.nix
+    ../../common/home-mgr/gimp.nix
     ../../common/home-mgr/obsidian.nix
     ../../common/home-mgr/unity.nix
     ../../common/home-mgr/ghostty.nix
@@ -38,6 +40,7 @@
     ../../common/home-mgr/t3code.nix
     ../../common/home-mgr/matlab.nix
     ../../common/home-mgr/music.nix
+    ../../common/home-mgr/steam-run.nix
   ];
 
   # Hyprland config
