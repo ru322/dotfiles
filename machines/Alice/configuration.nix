@@ -3,23 +3,42 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  sshKeys = import ../../resources/ssh-keys/koyama.nix;
+in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../common/nixos/default.nix
-      ../../common/nixos/gvfs.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../common/nixos/ssh.nix
+    # ../../common/nixos/hyprland.nix
+    ../../common/nixos/nix.nix
+    ../../common/nixos/programs.nix
+    ../../common/nixos/fonts.nix
+    ../../common/nixos/nixos-vscode-server.nix
+    ../../common/nixos/tailscale.nix
+    ../../common/nixos/steam.nix
+    ../../common/nixos/gvfs.nix
+    ../../common/nixos/podman.nix
+  ];
 
-  nix = {
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-    };
-  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # NVIDIA (RTX). The open kernel modules are required for newer GPUs and
+  # work on Turing and later; modesetting is required by niri (Wayland).
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+  };
+  boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
 
   networking.hostName = "Alice"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -30,6 +49,13 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Bluetooth (BlueZ) with blueman for pairing from the desktop.
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Tokyo";
@@ -48,14 +74,6 @@
     LC_TELEPHONE = "ja_JP.UTF-8";
     LC_TIME = "ja_JP.UTF-8";
   };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -86,24 +104,52 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.koyama = {
+  users.users."koyama" = {
     isNormalUser = true;
     description = "koyama";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
+    extraGroups = [
+      "networkmanager"
+      "wheel"
     ];
+    openssh.authorizedKeys.keys = sshKeys;
   };
 
   # Install firefox.
   #programs.firefox.enable = true;
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    qt6Packages.fcitx5-configtool
+    cifs-utils
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
+  fileSystems."/mnt/nas" = {
+    device = "//192.168.1.111/ru3";
+    fsType = "cifs";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [
+        "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100,file_mode=0644,dir_mode=0755"
+        "nofail"
+      ];
+  };
+
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

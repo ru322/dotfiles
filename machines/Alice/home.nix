@@ -10,8 +10,10 @@
   imports = [
     ../../common/home-mgr/neovim.nix
     ../../common/home-mgr/dev.nix
+    ../../common/home-mgr/desktop.nix
+    ../../common/home-mgr/firefox.nix
     ../../common/home-mgr/libreoffice.nix
-    ../../common/home-mgr/sunshine.nix
+    #../../common/home-mgr/sunshine.nix
     ../../common/home-mgr/wl-clipboard.nix
     ../../common/home-mgr/git.nix
     ../../common/home-mgr/tmux.nix
@@ -19,15 +21,24 @@
     ../../common/home-mgr/yazi-gvfs.nix
     ../../common/home-mgr/zsh.nix
     ../../common/home-mgr/fish.nix
-  ];
-
-  # Hyprland config
-  xdg.configFile."hypr" = {
-    source = ../../common/.config/hypr;
-    recursive = true;
-  };
-
-  home.packages = with pkgs; [
-    vscode
+    #../../common/home-mgr/nixos-vscoder-server.nix
+    #../../common/home-mgr/docker-cli.nix
+    ../../common/home-mgr/codex.nix
+    ../../common/home-mgr/chatgpt.nix
+    ../../common/home-mgr/niri.nix
+    ../../common/home-mgr/hazkey.nix
+    ../../common/home-mgr/noctalia.nix
+    ../../common/home-mgr/discord.nix
+    ../../common/home-mgr/steam.nix
+    ../../common/home-mgr/minecraft.nix
+    ../../common/home-mgr/gimp.nix
+    ../../common/home-mgr/obsidian.nix
+    ../../common/home-mgr/unity.nix
+    ../../common/home-mgr/ghostty.nix
+    ../../common/home-mgr/kitty.nix
+    ../../common/home-mgr/claude.nix
+    ../../common/home-mgr/t3code.nix
+    ../../common/home-mgr/music.nix
+    ../../common/home-mgr/steam-run.nix
   ];
 }
