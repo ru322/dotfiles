@@ -27,6 +27,24 @@ home-manager switch --flake path:.#<machine>
 
 `path:` を付けると、Git に add する前の新規ファイルも含めて評価されます。
 
+## AI エージェントのサンドボックス
+
+`common/home-mgr/agent-sandbox.nix` が bwrap でエージェントを包みます。
+`opencode` は起動したディレクトリをワークスペースとして、そこだけを読み書き可能にします。
+ホーム、`/mnt`、`/media` などは tmpfs で隠し、opencode の状態ディレクトリ
+(`~/.local/share/opencode` など)、Nix プロファイル、git 設定だけを戻します。
+`/mnt/nas`、SSH 鍵、他のプロジェクトは見えません。
+
+- `opencode` は `--standalone` で起動し、ホストのバックグラウンドサービスには接続しません。
+  さらに `service.json` を空に上書きするので、ホスト側サービスの API も叩けません。
+- 追加で許可したいパスは `common/home-mgr/codex.nix` の
+  `sandbox.workspace { extraWritable = [ ... ]; extraReadOnly = [ ... ]; }` に書きます。
+  パスはホスト側の絶対パスです。
+- TUI のタブは `OPENCODE_CLI_CONFIG_CONTENT` で無効化しています (`tabs.mode: "off"`)。
+  グローバルの `~/.config/opencode/cli.json` は変更しません。
+- SSH 鍵が見えないため、`git push` はサンドボックス外で行います。
+- ネットワークは隔離していません (モデル API に接続するため)。
+
 ## Satori のデスクトップ
 
 niri + noctalia (バー、ランチャー、通知、ロック画面、壁紙) で、tuigreet から起動します。

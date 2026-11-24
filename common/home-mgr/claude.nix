@@ -10,7 +10,7 @@ let
 in
 {
     home.packages = [
-        (sandbox llmAgents.claude-code "claude")
+        (sandbox.hideNas llmAgents.claude-code "claude")
         llmAgents.claude-desktop
     ];
 
