@@ -1,6 +1,7 @@
 { inputs, pkgs, lib, ... }:
 let
   llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+  sandbox = import ./agent-sandbox.nix { inherit pkgs; };
   statusline = pkgs.writeShellApplication {
     name = "claude-statusline";
     runtimeInputs = [ pkgs.jq pkgs.coreutils ];
@@ -9,7 +10,7 @@ let
 in
 {
     home.packages = [
-        llmAgents.claude-code
+        (sandbox llmAgents.claude-code "claude")
         llmAgents.claude-desktop
     ];
 

@@ -20,6 +20,7 @@ in
     ../../common/nixos/steam.nix
     ../../common/nixos/gvfs.nix
     ../../common/nixos/podman.nix
+    ./agent-keepawake.nix
   ];
 
   # Bootloader.
@@ -92,7 +93,9 @@ in
     };
   };
 
-  # Suspend the laptop when the lid is closed.
+  # Suspend the laptop when the lid is closed. While a coding agent
+  # (opencode/codex/claude) is running, agent-keepawake.nix keeps the machine
+  # awake for up to 30 minutes so a long task survives closing the lid.
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "suspend";
