@@ -26,11 +26,19 @@ let
       halfwidthKatakana = true;
       extendedEmoji = true;
     };
-    enabledKeymaps = map (name: {
-      inherit name;
-      isBuiltIn = true;
-      filename = name;
-    }) [ "Fullwidth Number" "Fullwidth Symbol" "Japanese Symbol" "Fullwidth Space" ];
+    enabledKeymaps =
+      map
+        (name: {
+          inherit name;
+          isBuiltIn = true;
+          filename = name;
+        })
+        [
+          "Fullwidth Number"
+          "Fullwidth Symbol"
+          "Japanese Symbol"
+          "Fullwidth Space"
+        ];
     enabledTables = [
       {
         name = "Romaji";
@@ -48,6 +56,30 @@ let
   };
 in
 {
+  # fcitx5 profile: Japanese keyboard plus hazkey as the default input method.
+  # fcitx5 forwards keys with the group layout, so a "us" default makes
+  # Xwayland apps (e.g. Unity) see a US keymap. Read-only: configtool can't save.
+  xdg.configFile."fcitx5/profile" = {
+    force = true;
+    text = ''
+      [Groups/0]
+      Name=Default
+      Default Layout=jp
+      DefaultIM=hazkey
+
+      [Groups/0/Items/0]
+      Name=keyboard-jp
+      Layout=
+
+      [Groups/0/Items/1]
+      Name=hazkey
+      Layout=jp
+
+      [GroupOrder]
+      0=Default
+    '';
+  };
+
   # Read-only: hazkey-settings can't save; change settings here instead.
   xdg.configFile."hazkey/config.json" = {
     force = true;
