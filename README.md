@@ -7,8 +7,8 @@ NixOS / Home Manager の個人設定。flake で管理しています。
 ```
 flake.nix           # マシンごとの nixosConfigurations と homeConfigurations
 machines/<name>/    # configuration.nix, hardware-configuration.nix, home.nix
-common/nixos/       # 共通の NixOS モジュール (niri, fonts, fcitx5, docker, ...)
-common/home-mgr/    # 共通の Home Manager モジュール (fish, kitty, neovim, noctalia, ...)
+common/nixos/       # 共通の NixOS モジュール (gnome/hyprland, fonts, fcitx5, docker, ...)
+common/home-mgr/    # 共通の Home Manager モジュール (fish, kitty, neovim, gnome, ...)
 common/.config/     # 上記モジュールから配置する設定ファイル
 resources/          # 壁紙、SSH 公開鍵
 ```
@@ -47,9 +47,31 @@ home-manager switch --flake path:.#<machine>
 
 ## Satori のデスクトップ
 
-niri + noctalia (バー、ランチャー、通知、ロック画面、壁紙) で、tuigreet から起動します。
-niri の設定は `common/nixos/niri.nix` が `/etc/niri/config.kdl` に配置するので、
-`nixos-rebuild` で反映されます。
+GNOME 50 (Wayland) を GDM から起動します。標準の GNOME の操作に合わせつつ、
+Colloid-Dark の GTK テーマ + アイコン、Afterglow (Catppuccin Pink) カーソル、
+blur-my-shell によるパネル/ドック/Overview のブラー（OJII3 さんの dotfiles を
+参考）でまとめています。壁紙は `~/Pictures/Wallpapers` (無ければ `~/Pictures`)
+の画像から 30 分ごとにランダムに切り替わります (ログイン直後と
+`home-manager switch` 時にも適用)。アプリウィンドウ自体は透過しません。
+画面左には常時表示のドック (Dash to Dock) があり、アプリの起動と切り替えが
+できます。GNOME と kitty の設定は共通モジュールに置いて、Orin / Alice とも
+共有しています。
+
+- `common/nixos/gnome.nix`: GDM、GNOME セッション、ポータル、gnome-keyring
+- `common/home-mgr/gnome.nix`: Colloid テーマ/アイコン/カーソル、壁紙
+  ローテーション、左ドック、クリップボード履歴、blur-my-shell、
+  ショートカット、AppIndicator
+- `common/home-mgr/kitty.nix`: UDEV Gothic 35NF、角丸ウィンドウ、左の
+  powerline タブバー
+- `machines/Satori/gnome.nix`: ノート PC の電源設定のみ (AC 接続中は
+  自動サスペンドしない、バッテリー時は 30 分)
+
+ショートカットは GNOME 標準 (Super でアクティビティ、`Super+←/→` で
+ウィンドウをタイル、`Super+Tab` で切り替え) に加えて、`Super+Return` で
+kitty、`Super+E` で Nautilus、`Super+Q` でウィンドウを閉じます。
+`Super+V` でクリップボード履歴を開いて選択できます
+(通知一覧は `Super+M`)。ワークスペースは `Super+Ctrl+←/→` で移動します。
+スクリーンショットは GNOME 標準の Print / Alt+Print / Shift+Print です。
 
 ## MATLAB (Satori)
 

@@ -2,7 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 let
   sshKeys = import ../../resources/ssh-keys/koyama.nix;
 in
@@ -11,7 +14,7 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../common/nixos/ssh.nix
-    # ../../common/nixos/hyprland.nix
+    ../../common/nixos/gnome.nix
     ../../common/nixos/nix.nix
     ../../common/nixos/programs.nix
     ../../common/nixos/fonts.nix
@@ -23,12 +26,29 @@ in
     ./agent-keepawake.nix
   ];
 
+  # The GNOME module (common/nixos/gnome.nix) enables GDM and the GNOME
+  # portal stack; no compositor-specific session or portal overrides needed.
+
+  # GNOME does not implement zwp_input_method_v2, so fcitx5's Wayland frontend
+  # (used by niri/Hyprland) cannot work here. Let GTK/Qt applications talk to
+  # fcitx5 through their IM modules instead; XMODIFIERS covers X11 apps.
+  i18n.inputMethod.fcitx5.waylandFrontend = false;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Let systemd discover the swapfile's resume offset and pass it through
   # the HibernateLocation EFI variable when hibernating.
   boot.initrd.systemd.enable = true;
+
+  # Keep the classic OpenSSH agent (keys added by ssh-add survive across
+  # sessions); GNOME's gcr agent would otherwise be installed as the only
+  # agent. gcr-ssh-agent is enabled by default by the GNOME module.
+  services.gnome.gcr-ssh-agent.enable = false;
+  programs.ssh.startAgent = true;
+  programs.ssh.extraConfig = ''
+    AddKeysToAgent yes
+  '';
 
   swapDevices = [
     {
@@ -48,12 +68,11 @@ in
   networking.networkmanager.enable = true;
   services.cloudflare-warp.enable = true;
 
-  # Bluetooth (BlueZ) with blueman for pairing from the desktop.
+  # Bluetooth (BlueZ); pairing and device management use GNOME Settings.
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
 
   # Laptop power management. TLP automatically switches between the AC and
   # battery profiles when the power source changes.
@@ -224,4 +243,3 @@ in
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-

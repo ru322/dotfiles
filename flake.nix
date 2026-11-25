@@ -97,7 +97,7 @@
         ];
       };
       Orin = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs= import inputs.nixpkgs {
+        pkgs = import inputs.nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
@@ -144,7 +144,6 @@
         modules = [
           inputs.vscode-server.nixosModules.default
           ./common/nixos/hazkey.nix
-          ./common/nixos/niri.nix
           ./machines/Satori/configuration.nix
         ];
       };

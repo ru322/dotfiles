@@ -21,13 +21,14 @@
     ../../common/home-mgr/yazi-gvfs.nix
     ../../common/home-mgr/zsh.nix
     ../../common/home-mgr/fish.nix
+    ../../common/home-mgr/ssh.nix
     #../../common/home-mgr/nixos-vscoder-server.nix
     #../../common/home-mgr/docker-cli.nix
     ../../common/home-mgr/codex.nix
     ../../common/home-mgr/chatgpt.nix
-    ../../common/home-mgr/niri.nix
+    ../../common/home-mgr/gnome.nix
+    ./gnome.nix
     ../../common/home-mgr/hazkey.nix
-    ../../common/home-mgr/noctalia.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
     ../../common/home-mgr/minecraft.nix
@@ -43,11 +44,7 @@
     ../../common/home-mgr/steam-run.nix
   ];
 
-  # Hyprland config
-  #xdg.configFile."hypr" = {
-  #  source = ../../common/.config/hypr;
-  #  recursive = true;
-  #};
+  # GNOME-specific desktop tweaks (dconf) live in ./gnome.nix.
 
   #home.packages = with pkgs; [
   #  vscode
