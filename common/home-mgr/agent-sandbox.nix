@@ -18,7 +18,13 @@ let
   coreutils = pkgs.coreutils;
 
   # extraWritable / extraReadOnly はホスト側の絶対パスを渡す。
-  workspace = { pkg, bin, extraWritable ? [ ], extraReadOnly ? [ ] }:
+  workspace =
+    {
+      pkg,
+      bin,
+      extraWritable ? [ ],
+      extraReadOnly ? [ ],
+    }:
     pkgs.writeShellScriptBin bin ''
       set -eu
 
@@ -95,7 +101,9 @@ let
         --unshare-pid
         --unshare-ipc
         --disable-userns
-        --new-session
+        # --new-session は制御端末から切り離すため SIGWINCH が届かず、
+        # kitty などのリサイズに OpenCode の TUI が追従しなくなる。
+        # TIOCSTI は最近のカーネルでは既定で無効 (dev.tty.legacy_tiocsti=0)。
         --die-with-parent
       )
 
@@ -174,24 +182,26 @@ in
 {
   inherit workspace;
 
-  hideNas = pkg: bin: pkgs.writeShellScriptBin bin ''
-    set -eu
+  hideNas =
+    pkg: bin:
+    pkgs.writeShellScriptBin bin ''
+      set -eu
 
-    # cwd が /mnt/nas 配下だと、上にマウントを被せても cwd 経由で元の
-    # ファイルに届いてしまうので、その場合は起動を拒否する。
-    case "$PWD/" in
-      /mnt/nas/*)
-        echo "${bin}: refusing to start from inside /mnt/nas (current directory: $PWD)" >&2
-        exit 1
-        ;;
-    esac
+      # cwd が /mnt/nas 配下だと、上にマウントを被せても cwd 経由で元の
+      # ファイルに届いてしまうので、その場合は起動を拒否する。
+      case "$PWD/" in
+        /mnt/nas/*)
+          echo "${bin}: refusing to start from inside /mnt/nas (current directory: $PWD)" >&2
+          exit 1
+          ;;
+      esac
 
-    exec ${bwrap} \
-      --dev-bind / / \
-      --tmpfs /mnt/nas \
-      --unshare-pid \
-      --proc /proc \
-      --die-with-parent \
-      -- ${pkg}/bin/${bin} "$@"
-  '';
+      exec ${bwrap} \
+        --dev-bind / / \
+        --tmpfs /mnt/nas \
+        --unshare-pid \
+        --proc /proc \
+        --die-with-parent \
+        -- ${pkg}/bin/${bin} "$@"
+    '';
 }
