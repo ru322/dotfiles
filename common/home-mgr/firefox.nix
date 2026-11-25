@@ -1,4 +1,9 @@
 { config, lib, ... }:
+let
+  # GNOME has no compositor-side wallpaper blur, so translucent chrome just
+  # looks muddy. Set this back to true to restore the niri/Hyprland look.
+  transparentChrome = false;
+in
 {
   programs.firefox = {
     enable = true;
@@ -18,13 +23,14 @@
         # Load userChrome.css below.
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         # Let sidebar extension pages (Tree Style Tab) be see-through.
-        "browser.tabs.allow_transparent_browser" = true;
+        # (Disabled with transparentChrome below for GNOME.)
+        "browser.tabs.allow_transparent_browser" = transparentChrome;
       };
 
       # Translucent (0.5) tabs/toolbars/sidebar; page content at 0.9.
       # The window only gets an alpha channel when body's background isn't
       # opaque, so body carries the 0.5 color and everything above it is cleared.
-      userChrome = ''
+      userChrome = lib.optionalString transparentChrome ''
         body {
           background-color: color-mix(in srgb, var(--toolbox-background-color) 50%, transparent) !important;
         }
@@ -71,7 +77,7 @@
       '';
 
       # Clear Tree Style Tab's own sidebar background.
-      userContent = ''
+      userContent = lib.optionalString transparentChrome ''
         @-moz-document regexp("moz-extension://[^/]+/sidebar/sidebar\\.html.*") {
           :root,
           body,
