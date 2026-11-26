@@ -130,12 +130,17 @@ in
 
     "org/gnome/desktop/calendar".show-weekdate = true;
 
+    # Disable pointer acceleration for both a mouse and the touchpad.
+    "org/gnome/desktop/peripherals/mouse" = {
+      accel-profile = "flat";
+    };
+
     "org/gnome/desktop/peripherals/touchpad" = {
       natural-scroll = true;
       tap-to-click = true;
       tap-and-drag = true;
       disable-while-typing = true;
-      accel-profile = "adaptive";
+      accel-profile = "flat";
     };
 
     "org/gnome/desktop/screensaver" = {
@@ -250,7 +255,12 @@ in
       force-straight-corner = true;
     };
 
-    "org/gnome/shell/extensions/blur-my-shell.dash-to-dock" = {
+    # The schema path uses a slash, not a dot: dconf load writes by path, so
+    # the dotted schema ID would not affect the running extension.
+    "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+      # The default "rounded" pipeline hardcodes a 24px corner effect; the
+      # non-rounded pipeline keeps the blur square like dash-to-dock itself.
+      pipeline = "pipeline_default";
       corner-radius = 0;
     };
   };
