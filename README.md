@@ -35,6 +35,8 @@ home-manager switch --flake path:.#<machine>
 (`~/.local/share/opencode` など)、Nix プロファイル、git 設定だけを戻します。
 `/mnt/nas`、SSH 鍵、他のプロジェクトは見えません。
 
+`claude` / `codex` / `agy` はホームを見せたまま `/mnt/nas` だけを隠します。
+
 - `opencode` は `--standalone` で起動し、ホストのバックグラウンドサービスには接続しません。
   さらに `service.json` を空に上書きするので、ホスト側サービスの API も叩けません。
 - 追加で許可したいパスは `common/home-mgr/codex.nix` の

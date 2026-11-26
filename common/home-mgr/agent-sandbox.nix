@@ -5,7 +5,7 @@
 # tmpfs で隠してから、必要なパスだけを bind mount で戻す。
 #
 # hideNas:
-#   /mnt/nas だけを隠す従来のモード。claude / codex 用。
+#   /mnt/nas だけを隠す従来のモード。claude / codex / agy 用。
 #
 # workspace:
 #   起動時のカレントディレクトリを唯一の読み書き可能なワークスペースとして扱う。
