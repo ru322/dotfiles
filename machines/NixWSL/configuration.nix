@@ -18,6 +18,7 @@ in
     ../../common/nixos/programs.nix
     ../../common/nixos/nixos-vscode-server.nix
     ../../common/nixos/ssh.nix
+    ../../common/nixos/tailscale.nix
   ];
 
   wsl.enable = true;

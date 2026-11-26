@@ -1,11 +1,18 @@
 { config, pkgs, ... }:
+let
+  tailscaleUser =
+    if (config.wsl.enable or false) then
+      config.wsl.defaultUser
+    else
+      "koyama";
+in
 {
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";
     extraSetFlags = [
-        "--accept-routes=true"
-        "--operator=koyama"
+      "--accept-routes=true"
+      "--operator=${tailscaleUser}"
     ];
   };
   networking.firewall = {
@@ -24,7 +31,7 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "simple";
-      User = "koyama";
+      User = tailscaleUser;
       Restart = "on-failure";
       RestartSec = "15s";
       ConditionPathIsDirectory = "%h/Downloads";
