@@ -16,11 +16,11 @@ in
     package = llmAgents.codex;
   };
   home.packages = [
-    # opencode は起動時のカレントディレクトリだけを読み書き可能にする。
-    (sandbox.workspace { pkg = opencode; bin = "opencode"; })
+    # RO ベース + 機密マスク + 選択的 RW で隔離する。
+    (sandbox.opencode { pkg = opencode; })
     # programs.codex が入れる本物の codex より優先して、ラッパーを PATH に置く。
     # cfg.package は本物のままなので、ホームマネージャーのバージョン判定は壊れない。
-    (lib.hiPrio (sandbox.hideNas llmAgents.codex "codex"))
+    (lib.hiPrio (sandbox.codex { pkg = llmAgents.codex; }))
     pkgs.bubblewrap
   ];
 }

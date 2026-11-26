@@ -30,18 +30,19 @@ home-manager switch --flake path:.#<machine>
 ## AI エージェントのサンドボックス
 
 `common/home-mgr/agent-sandbox.nix` が bwrap でエージェントを包みます。
-`opencode` は起動したディレクトリをワークスペースとして、そこだけを読み書き可能にします。
-ホーム、`/mnt`、`/media` などは tmpfs で隠し、opencode の状態ディレクトリ
-(`~/.local/share/opencode` など)、Nix プロファイル、git 設定だけを戻します。
-`/mnt/nas`、SSH 鍵、他のプロジェクトは見えません。
+`agy` / `opencode` / `claude` / `codex` はすべて **RO ベース + 機密マスク + 選択的 RW** で隔離します。
 
-`claude` / `codex` / `agy` はホームを見せたまま `/mnt/nas` だけを隠します。
+- `/` 全体を読み取り専用 (`--ro-bind`) にし、非認証の設定ファイル（git, nvim, fish, Nix プロファイルなど）は閲覧できます。
+- `/mnt`（`/mnt/nas` を含む）、`/media`、`/run`（gvfs, ssh-agent, keyring, dbus, podman など）、`/var`、`/tmp` は tmpfs で遮蔽します。`/mnt/nas` 配下からの起動も拒否します。
+- SSH 鍵、GPG、keyring、各種 CLI/クラウド認証、ブラウザプロファイル、個人用ディレクトリ（`Documents`, `Downloads`, `Pictures`, `myObsidian` など）、シェル履歴、他エージェントの認証・状態ディレクトリ（および `herdr` ソケット）を遮蔽します。
+  - `agy` のみ `herdr-opencode` スキル用に `~/.config/herdr` の遮蔽を解除しています（`opencode` / `claude` / `codex` では引き続き遮蔽）。
+- 書き込み可能なのは起動時のカレントディレクトリと、各エージェント自身の状態ディレクトリだけです（`agy`: `~/.gemini`, `~/.config/antigravity`, `~/.cache/antigravity`、`opencode`: `~/.local/share/opencode`, `~/.local/state/opencode`, `~/.cache/opencode`、`claude`: `~/.claude`, `~/.claude.json`, `~/.cache/claude-cli-nodejs`、`codex`: `~/.codex`, `~/.local/state/codex`, `~/.cache/codex-runtimes`）。
 
 - `opencode` は `--standalone` で起動し、ホストのバックグラウンドサービスには接続しません。
   さらに `service.json` を空に上書きするので、ホスト側サービスの API も叩けません。
-- 追加で許可したいパスは `common/home-mgr/codex.nix` の
-  `sandbox.workspace { extraWritable = [ ... ]; extraReadOnly = [ ... ]; }` に書きます。
-  パスはホスト側の絶対パスです。
+- 追加で許可・遮蔽したいパスは各モジュール (`antigravity.nix`, `codex.nix`, `claude.nix`) の
+  `sandbox.agy` / `sandbox.opencode` / `sandbox.claude` / `sandbox.codex` に
+  `extraWritable`, `extraReadOnly`, `extraMasked`, `unmasked` を渡して調整します。
 - TUI のタブは `OPENCODE_CLI_CONFIG_CONTENT` で無効化しています (`tabs.mode: "off"`)。
   グローバルの `~/.config/opencode/cli.json` は変更しません。
 - SSH 鍵が見えないため、`git push` はサンドボックス外で行います。

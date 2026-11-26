@@ -5,8 +5,12 @@ let
 in
 {
   home.packages = [
-    # /mnt/nas を隠すだけの従来モード。claude / codex と同じ扱い。
-    (sandbox.hideNas llmAgents.antigravity-cli "agy")
+    # RO ベース + 機密マスク + 選択的 RW で隔離する。
+    # herdr-opencode スキルで herdr CLI を使うため、agy のみ .config/herdr を許可する。
+    (sandbox.agy {
+      pkg = llmAgents.antigravity-cli;
+      unmasked = [ ".config/herdr" ];
+    })
     pkgs.jq
   ];
 

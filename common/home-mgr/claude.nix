@@ -10,7 +10,8 @@ let
 in
 {
     home.packages = [
-        (sandbox.hideNas llmAgents.claude-code "claude")
+        # RO ベース + 機密マスク + 選択的 RW で隔離する。
+        (sandbox.claude { pkg = llmAgents.claude-code; })
         llmAgents.claude-desktop
     ];
 
