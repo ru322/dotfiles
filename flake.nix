@@ -33,8 +33,19 @@
       url = "github:aster-void/nix-hazkey";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    karukan = {
+      url = "github:togatoga/karukan";
+      flake = false;
+    };
   };
   outputs = inputs: {
+    packages.x86_64-linux.fcitx5-karukan =
+      inputs.nixpkgs.legacyPackages.x86_64-linux.callPackage ./common/pkgs/karukan.nix
+        {
+          src = inputs.karukan;
+          rev = inputs.karukan.rev or null;
+        };
+
     homeConfigurations = {
       Nix = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
@@ -143,7 +154,7 @@
         };
         modules = [
           inputs.vscode-server.nixosModules.default
-          ./common/nixos/hazkey.nix
+          ./common/nixos/karukan.nix
           ./machines/Satori/configuration.nix
         ];
       };

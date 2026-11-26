@@ -28,7 +28,7 @@
     ../../common/home-mgr/chatgpt.nix
     ../../common/home-mgr/gnome.nix
     ./gnome.nix
-    ../../common/home-mgr/hazkey.nix
+    ../../common/home-mgr/karukan.nix
     ../../common/home-mgr/discord.nix
     ../../common/home-mgr/steam.nix
     ../../common/home-mgr/minecraft.nix

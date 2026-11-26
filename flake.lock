@@ -162,6 +162,22 @@
         "type": "github"
       }
     },
+    "karukan": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795253417,
+        "narHash": "sha256-Qkubj92MZM7EfoWJKg0mCCrPDxNWkjz/YYsEa7Fs6JY=",
+        "owner": "togatoga",
+        "repo": "karukan",
+        "rev": "2f0a00a1802538b668e11b49760d4a97f717b637",
+        "type": "github"
+      },
+      "original": {
+        "owner": "togatoga",
+        "repo": "karukan",
+        "type": "github"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -278,6 +294,7 @@
         "clipboard-yazi": "clipboard-yazi",
         "gvfs-yazi": "gvfs-yazi",
         "home-manager": "home-manager",
+        "karukan": "karukan",
         "llm-agents": "llm-agents",
         "nix-hazkey": "nix-hazkey",
         "nixos-wsl": "nixos-wsl",
